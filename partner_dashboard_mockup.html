@@ -36,8 +36,9 @@
 
   /* ========== CONTROLS ROW ========== */
   .controls-row {
-    background: #fff; border-bottom: 1px solid #e0e0e0;
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
     padding: 10px 16px; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 14px;
   }
   .ctrl { display: flex; flex-direction: column; gap: 3px; }
   .ctrl-label { font-size: 11px; color: #666; font-weight: 500; }
@@ -243,30 +244,31 @@
   </div>
 </div>
 
-<!-- ===== CONTROLS ===== -->
-<div class="controls-row">
-  <div class="ctrl">
-    <span class="ctrl-label">Date Range</span>
-    <div class="ctrl-pill">&#128197; On or after 05/01/2026 <span class="x">&times;</span></div>
-  </div>
-  <div class="ctrl">
-    <span class="ctrl-label">Date Granularity</span>
-    <div class="gran-toggle">
-      <button class="gran-btn">Day</button>
-      <button class="gran-btn">Week</button>
-      <button class="gran-btn active">Month</button>
-    </div>
-  </div>
-  <div class="ctrl"><span class="ctrl-label">Partner Name</span><select class="ctrl-select"><option>Select partner</option></select></div>
-  <div class="ctrl"><span class="ctrl-label">Utm Source</span><select class="ctrl-select"><option>Select values</option></select></div>
-  <div class="ctrl"><span class="ctrl-label">Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
-  <div class="ctrl"><span class="ctrl-label">Credit Score Band</span><select class="ctrl-select"><option>Select values</option></select></div>
-</div>
-
 <div class="page-content">
 
 <!-- ==================== APPLICATIONS ==================== -->
 <div class="tab-page active" id="pg-applications">
+
+  <!-- Applications controls -->
+  <div class="controls-row">
+    <div class="ctrl">
+      <span class="ctrl-label">Date Range</span>
+      <div class="ctrl-pill">&#128197; On or after 05/01/2026 <span class="x">&times;</span></div>
+    </div>
+    <div class="ctrl">
+      <span class="ctrl-label">Date Granularity</span>
+      <div class="gran-toggle">
+        <button class="gran-btn">Day</button>
+        <button class="gran-btn">Week</button>
+        <button class="gran-btn active">Month</button>
+      </div>
+    </div>
+    <div class="ctrl"><span class="ctrl-label">Utm Source</span><select class="ctrl-select"><option>Select values</option></select></div>
+    <div class="ctrl"><span class="ctrl-label">Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
+    <div class="ctrl"><span class="ctrl-label">Credit Score Band</span><select class="ctrl-select"><option>Select values</option></select></div>
+    <div class="ctrl"><span class="ctrl-label">Level 3 Sub Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
+    <div class="ctrl"><span class="ctrl-label">Event Name</span><select class="ctrl-select"><option>Select values</option></select></div>
+  </div>
 
   <!-- Container 1: KPI sidebar + Application Metrics combo -->
   <div class="s-container">
@@ -284,6 +286,8 @@
           <div class="bars" id="app-combo"></div>
           <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
             <polyline points="50,105 150,100 250,95 350,90 450,85 550,82 650,78 750,72 850,76 950,78" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="50,40 150,38 250,35 350,32 450,30 550,28 650,26 750,24 850,26 950,28" fill="none" stroke="var(--t1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="50,130 150,125 250,118 350,110 450,105 550,100 650,95 750,88 850,92 950,95" fill="none" stroke="var(--p1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg></div>
         </div>
         <div class="ax" id="app-combo-ax"></div>
@@ -293,6 +297,8 @@
           <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Approved</div>
           <div class="leg-item"><div class="leg-sq" style="background:var(--gold)"></div>Booked</div>
           <div class="leg-item"><div class="leg-ln" style="background:var(--orange)"></div>TTD Approval Rate</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Offer Accept Rate</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--p1)"></div>Conversion Rate</div>
         </div>
         <table class="dtbl">
           <thead><tr><th></th><th>MAY 31</th><th>JUN 30</th><th>JUL 31</th><th>AUG 31</th><th>SEP 30</th><th>OCT 31</th><th>NOV 30</th><th>DEC 31</th><th>JAN 31</th><th>FEB 28</th></tr></thead>
@@ -484,6 +490,22 @@
 <!-- ==================== TRANSACTION ==================== -->
 <div class="tab-page" id="pg-transaction">
 
+  <!-- Transaction controls: only Date Range + Date Granularity -->
+  <div class="controls-row">
+    <div class="ctrl">
+      <span class="ctrl-label">Date Range</span>
+      <div class="ctrl-pill">&#128197; On or after 05/01/2026 <span class="x">&times;</span></div>
+    </div>
+    <div class="ctrl">
+      <span class="ctrl-label">Date Granularity</span>
+      <div class="gran-toggle">
+        <button class="gran-btn">Day</button>
+        <button class="gran-btn">Week</button>
+        <button class="gran-btn active">Month</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Container 1: KPI sidebar + Net Settled Volume combo -->
   <div class="s-container">
     <div class="kpi-chart">
@@ -641,6 +663,22 @@
 
 <!-- ==================== PORTFOLIO ==================== -->
 <div class="tab-page" id="pg-portfolio">
+
+  <!-- Portfolio controls: only Date Range + Date Granularity -->
+  <div class="controls-row">
+    <div class="ctrl">
+      <span class="ctrl-label">Date Range</span>
+      <div class="ctrl-pill">&#128197; On or after 05/01/2026 <span class="x">&times;</span></div>
+    </div>
+    <div class="ctrl">
+      <span class="ctrl-label">Date Granularity</span>
+      <div class="gran-toggle">
+        <button class="gran-btn">Day</button>
+        <button class="gran-btn">Week</button>
+        <button class="gran-btn active">Month</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Container 1: Portfolio Growth -->
   <div class="s-container">
