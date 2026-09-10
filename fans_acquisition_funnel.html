@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acquisition Funnel Flow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #fff; color: #1e293b;
+    display: flex; justify-content: center; align-items: flex-start;
+    height: 100vh; overflow: hidden;
+  }
+  .funnel {
+    display: flex; flex-direction: column; align-items: center;
+    transform-origin: top center; padding: 12px 0;
+  }
+  .title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+
+  /* Boxes */
+  .box {
+    padding: 4px 16px; border-radius: 20px; text-align: center;
+    font-size: 12px; font-weight: 600; border: 1.5px solid #cbd5e1;
+    background: #f8fafc; min-width: 140px; line-height: 1.4;
+  }
+  .box .ct { font-size: 11px; color: #64748b; font-weight: 500; }
+  .rejected { border-color: #f87171; background: #fef2f2; color: #dc2626; }
+  .approved { border-color: #6366f1; background: #eef2ff; }
+  .direct { border-color: #6366f1; background: #eef2ff; }
+  .return-box { border-color: #f59e0b; background: #fffbeb; }
+  .goal { border-color: #16a34a; background: #dcfce7; color: #15803d; }
+
+  /* Diamond */
+  .diamond-wrap { position: relative; width: 68px; height: 68px; }
+  .diamond {
+    position: absolute; top: 0; left: 0;
+    width: 68px; height: 68px;
+    border: 1.5px solid #a78bfa; background: #f5f3ff;
+    transform: rotate(45deg); border-radius: 4px;
+  }
+  .diamond-text {
+    position: absolute; top: 0; left: 0; width: 68px; height: 68px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; text-align: center; line-height: 1.2; z-index: 1;
+  }
+  .diamond-text .ct { font-size: 9px; color: #64748b; font-weight: 500; }
+
+  /* Vertical arrow with % */
+  .va { display: flex; flex-direction: column; align-items: center; }
+  .va .line { width: 1.5px; height: 8px; background: #94a3b8; }
+  .va .pct { font-size: 8px; font-weight: 700; color: #0369a1; background: #e0f2fe; padding: 0 4px; border-radius: 4px; line-height: 1.5; }
+  .va .tri { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid #94a3b8; }
+
+  /* Fork: SVG-drawn connector */
+  .fork-svg { display: block; }
+
+  .fork { display: flex; align-items: flex-start; justify-content: center; }
+  .fork-branch { display: flex; flex-direction: column; align-items: center; }
+  .fork-label { font-size: 9px; color: #64748b; font-style: italic; margin-bottom: 2px; }
+</style>
+<script>
+  function fit() {
+    const f = document.querySelector('.funnel');
+    f.style.transform = 'none';
+    requestAnimationFrame(() => {
+      const sy = (window.innerHeight - 4) / f.scrollHeight;
+      const sx = (window.innerWidth - 4) / f.scrollWidth;
+      f.style.transform = `scale(${Math.min(sx, sy, 1)})`;
+    });
+  }
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+</script>
+</head>
+<body>
+<div class="funnel">
+  <div class="title">Acquisition Funnel Flow</div>
+
+  <div class="box">Getting Started Viewed<div class="ct">169</div></div>
+  <div class="va"><div class="line"></div><div class="pct">39%</div><div class="tri"></div></div>
+  <div class="box">Getting Started Continue<div class="ct">66</div></div>
+  <div class="va"><div class="line"></div><div class="pct">97%</div><div class="tri"></div></div>
+  <div class="box">Confirm Phone / OTP<div class="ct">64</div></div>
+  <div class="va"><div class="line"></div><div class="pct">98%</div><div class="tri"></div></div>
+  <div class="box">Personal Info<div class="ct">63</div></div>
+  <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+  <div class="box">Income &amp; Housing<div class="ct">63</div></div>
+  <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+  <div class="box">App Submitted<div class="ct">63</div></div>
+  <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+
+  <!-- Decision diamond -->
+  <div class="diamond-wrap"><div class="diamond"></div><div class="diamond-text">Decision<br>Made<div class="ct">63</div></div></div>
+
+  <!-- Fork 1: Rejected / Approved — SVG connector -->
+  <svg class="fork-svg" width="400" height="30" viewBox="0 0 400 30">
+    <!-- center stem down -->
+    <line x1="200" y1="0" x2="200" y2="12" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- horizontal bar -->
+    <line x1="100" y1="12" x2="300" y2="12" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- left drop -->
+    <line x1="100" y1="12" x2="100" y2="26" stroke="#94a3b8" stroke-width="1.5"/>
+    <polygon points="96,24 104,24 100,30" fill="#94a3b8"/>
+    <!-- right drop -->
+    <line x1="300" y1="12" x2="300" y2="26" stroke="#94a3b8" stroke-width="1.5"/>
+    <polygon points="296,24 304,24 300,30" fill="#94a3b8"/>
+    <!-- labels -->
+    <text x="100" y="10" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic" font-family="sans-serif">Rejected</text>
+    <text x="300" y="10" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic" font-family="sans-serif">Approved</text>
+  </svg>
+
+  <div class="fork" style="gap:100px; width:400px;">
+    <!-- Rejected -->
+    <div class="fork-branch" style="width:150px;">
+      <div class="box rejected">Rejected X<div class="ct">3</div></div>
+    </div>
+
+    <!-- Approved -->
+    <div class="fork-branch" style="width:150px;">
+      <div class="box approved">Offer Viewed<div class="ct">59</div></div>
+
+      <!-- Fork 2: Direct / Return — SVG connector -->
+      <svg class="fork-svg" width="380" height="30" viewBox="0 0 380 30">
+        <line x1="190" y1="0" x2="190" y2="12" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="80" y1="12" x2="300" y2="12" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="80" y1="12" x2="80" y2="26" stroke="#94a3b8" stroke-width="1.5"/>
+        <polygon points="76,24 84,24 80,30" fill="#94a3b8"/>
+        <line x1="300" y1="12" x2="300" y2="26" stroke="#94a3b8" stroke-width="1.5"/>
+        <polygon points="296,24 304,24 300,30" fill="#94a3b8"/>
+        <text x="80" y="10" text-anchor="middle" font-size="8" fill="#64748b" font-style="italic" font-family="sans-serif">Direct path</text>
+        <text x="300" y="10" text-anchor="middle" font-size="8" fill="#64748b" font-style="italic" font-family="sans-serif">Exit &amp; return later</text>
+      </svg>
+
+      <div class="fork" style="gap:60px; width:380px;">
+        <!-- Direct path -->
+        <div class="fork-branch" style="width:160px;">
+          <div class="box direct">Offer Accepted<div class="ct">54</div></div>
+          <div class="va"><div class="line"></div><div class="pct">0%</div><div class="tri"></div></div>
+          <div class="box direct">Card Selected<div class="ct">0</div></div>
+          <div class="va"><div class="line"></div><div class="tri"></div></div>
+          <div class="box direct">PIN Created<div class="ct">44</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box direct">PIN Confirmed<div class="ct">44</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box goal">All Set &#10003;<div class="ct">44</div></div>
+        </div>
+
+        <!-- Return flow -->
+        <div class="fork-branch" style="width:160px;">
+          <div class="box return-box">Account Found Viewed<div class="ct">2</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box return-box">Account Found Continue<div class="ct">2</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box return-box">PIN Created<div class="ct">2</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box return-box">PIN Confirmed<div class="ct">2</div></div>
+          <div class="va"><div class="line"></div><div class="pct">100%</div><div class="tri"></div></div>
+          <div class="box return-box">Offer Accepted<div class="ct">2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
