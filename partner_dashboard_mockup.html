@@ -7,403 +7,460 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: #f5f5f5; color: #2d3748; font-size: 13px; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f5; color: #333; font-size: 13px;
+  }
 
-  /* SIGMA HEADER */
-  .sigma-header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-  .sigma-header-left { display: flex; align-items: center; gap: 10px; }
-  .sigma-icon { width: 26px; height: 26px; background: #333; border-radius: 5px; display: flex; align-items: center; justify-content: center; }
-  .sigma-icon svg { width: 14px; height: 14px; fill: #fff; }
-  .sigma-title { font-size: 14px; font-weight: 600; color: #1a202c; }
-  .sigma-edit { font-size: 11px; color: #6366f1; cursor: pointer; margin-left: 6px; font-weight: 500; }
+  /* ========== SIGMA CHROME ========== */
+  .sigma-header {
+    background: #fff; border-bottom: 1px solid #e0e0e0;
+    padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 200;
+  }
+  .sigma-header-left { display: flex; align-items: center; gap: 8px; }
+  .sigma-logo {
+    width: 28px; height: 28px; background: #191b22; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sigma-logo svg { width: 15px; height: 15px; fill: #f7c948; }
+  .wb-title { font-size: 14px; font-weight: 600; color: #191b22; }
+  .wb-edit { font-size: 12px; color: #4e7de0; cursor: pointer; margin-left: 4px; }
   .sigma-header-right { display: flex; align-items: center; gap: 6px; }
-  .sigma-btn { background: #fff; border: 1px solid #dce1e8; border-radius: 6px; padding: 5px 12px; font-size: 11px; color: #4a5568; cursor: pointer; font-weight: 500; }
-  .sigma-btn-primary { background: #333; color: #fff; border-color: #333; }
+  .hdr-btn {
+    background: #fff; border: 1px solid #d4d4d4; border-radius: 6px;
+    padding: 5px 12px; font-size: 12px; color: #444; cursor: pointer; font-weight: 500;
+  }
+  .hdr-btn.primary { background: #191b22; color: #fff; border-color: #191b22; }
 
-  /* FILTER BAR (controls row) */
-  .filter-bar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 10px 20px 12px; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-  .filter-item { display: flex; flex-direction: column; gap: 4px; }
-  .filter-label { font-size: 10px; color: #6b7280; font-weight: 600; letter-spacing: 0.2px; }
-  .filter-select { background: #fff; border: 1px solid #dce1e8; border-radius: 6px; padding: 5px 28px 5px 8px; font-size: 12px; color: #2d3748; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23718096'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; cursor: pointer; font-weight: 500; min-width: 120px; }
-  .filter-value { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #dce1e8; border-radius: 6px; padding: 5px 8px; font-size: 12px; color: #2d3748; font-weight: 500; white-space: nowrap; }
-  .filter-value .filter-icon { color: #a0aec0; font-size: 13px; }
-  .filter-value .filter-x { color: #a0aec0; font-size: 14px; cursor: pointer; margin-left: 2px; }
-  .granularity-toggle { display: inline-flex; border: 1px solid #dce1e8; border-radius: 6px; overflow: hidden; }
-  .granularity-toggle .gran-btn { padding: 5px 14px; font-size: 11px; font-weight: 600; color: #6b7280; background: #fff; border: none; cursor: pointer; border-right: 1px solid #dce1e8; }
-  .granularity-toggle .gran-btn:last-child { border-right: none; }
-  .granularity-toggle .gran-btn.active { background: #4e79a7; color: #fff; }
+  /* ========== CONTROLS ROW ========== */
+  .controls-row {
+    background: #fff; border-bottom: 1px solid #e0e0e0;
+    padding: 10px 16px; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+  }
+  .ctrl { display: flex; flex-direction: column; gap: 3px; }
+  .ctrl-label { font-size: 11px; color: #666; font-weight: 500; }
+  .ctrl-select {
+    background: #fff; border: 1px solid #d4d4d4; border-radius: 6px;
+    padding: 5px 26px 5px 8px; font-size: 12px; color: #333;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 8px center;
+    cursor: pointer; font-weight: 500; min-width: 120px;
+  }
+  .ctrl-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #e8f0fe; border: 1px solid #c5d7f7; border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; color: #1a56db; font-weight: 500;
+  }
+  .ctrl-pill .x { cursor: pointer; margin-left: 2px; color: #7ea8f0; }
+  .gran-toggle { display: inline-flex; border: 1px solid #d4d4d4; border-radius: 6px; overflow: hidden; }
+  .gran-btn {
+    padding: 5px 14px; font-size: 11px; font-weight: 600; color: #666;
+    background: #fff; border: none; cursor: pointer; border-right: 1px solid #d4d4d4;
+  }
+  .gran-btn:last-child { border-right: none; }
+  .gran-btn.active { background: #3b82f6; color: #fff; }
 
-  /* MAIN */
-  .main-content { padding: 0 0 44px; }
-  .tab-content { display: none; padding: 16px 20px; }
-  .tab-content.active { display: block; }
+  /* ========== PAGE CONTENT ========== */
+  .page-content { padding: 0 0 44px; }
+  .tab-page { display: none; padding: 14px 16px; }
+  .tab-page.active { display: block; }
 
-  /* CONTAINER (Sigma bordered container) */
-  .sigma-container { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+  /* ========== SIGMA CONTAINER (rounded bordered box) ========== */
+  .s-container {
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
+    margin-bottom: 14px; overflow: hidden;
+  }
 
-  /* SECTION HEADING (### markdown) */
-  .section-heading { font-size: 14px; font-weight: 700; color: #1a202c; padding: 12px 16px 8px; }
+  /* ========== KPI SIDEBAR + CHART LAYOUT ========== */
+  .kpi-chart { display: flex; }
+  .kpi-side {
+    width: 190px; min-width: 190px; border-right: 1px solid #ececec;
+    display: flex; flex-direction: column;
+  }
+  .kpi-cell {
+    padding: 10px 14px; flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .kpi-cell + .kpi-cell { border-top: 1px solid #f0f0f0; }
+  .kpi-name { font-size: 11px; color: #777; font-weight: 500; margin-bottom: 3px; line-height: 1.3; }
+  .kpi-val { font-size: 16px; font-weight: 700; color: #191b22; line-height: 1.15; }
+  .kpi-sub { font-size: 9px; color: #aaa; margin-top: 2px; }
+  .chart-pane { flex: 1; padding: 12px 14px; display: flex; flex-direction: column; min-height: 220px; }
 
-  /* KPI + CHART LAYOUT (sidebar style) */
-  .kpi-chart-layout { display: flex; min-height: 240px; }
-  .kpi-sidebar { width: 200px; min-width: 200px; display: flex; flex-direction: column; border-right: 1px solid #edf2f7; }
-  .kpi-item { padding: 14px 16px 12px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  .kpi-item + .kpi-item { border-top: 1px solid #f0f2f5; }
-  .kpi-label { font-size: 11px; color: #8895a7; font-weight: 500; margin-bottom: 4px; }
-  .kpi-value { font-size: 20px; font-weight: 700; color: #1a202c; line-height: 1.1; }
-  .kpi-note { font-size: 9px; color: #b0b8c4; margin-top: 3px; }
-  .chart-area { flex: 1; padding: 12px 16px; position: relative; display: flex; flex-direction: column; }
+  /* ========== BAR CHART ========== */
+  .bars { display: flex; align-items: flex-end; gap: 2px; flex: 1; min-height: 0; }
+  .bar-grp {
+    flex: 1; display: flex; align-items: flex-end; justify-content: center;
+    gap: 1px; height: 100%;
+  }
+  .b {
+    border-radius: 1.5px 1.5px 0 0; min-width: 3px;
+    transition: height 0.2s;
+  }
 
-  /* BARS */
-  .bar-chart { display: flex; align-items: flex-end; gap: 2px; flex: 1; min-height: 160px; }
-  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-  .bar-seg { width: 80%; min-width: 4px; max-width: 28px; border-radius: 2px 2px 0 0; }
+  /* ========== DATE AXIS ========== */
+  .ax { display: flex; gap: 2px; padding-top: 6px; }
+  .ax span { flex: 1; text-align: center; font-size: 10px; color: #999; }
 
-  /* LINE OVERLAY */
-  .line-overlay { position: absolute; top: 12px; left: 216px; right: 16px; bottom: 50px; pointer-events: none; }
-  .line-overlay.full { left: 16px; }
-  .line-overlay svg { width: 100%; height: 100%; }
+  /* ========== LEGEND ========== */
+  .leg { display: flex; gap: 14px; padding: 6px 0 2px; flex-wrap: wrap; }
+  .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #666; }
+  .leg-sq { width: 8px; height: 8px; border-radius: 1.5px; flex-shrink: 0; }
+  .leg-ln { width: 14px; height: 2.5px; border-radius: 2px; flex-shrink: 0; }
 
-  /* LEGEND */
-  .legend-row { display: flex; gap: 14px; padding: 8px 0 0; flex-wrap: wrap; }
-  .legend-chip { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #64748b; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
-  .legend-line { width: 16px; height: 2px; border-radius: 1px; }
+  /* ========== LINE OVERLAY ========== */
+  .chart-wrap { position: relative; flex: 1; display: flex; flex-direction: column; }
+  .ln-over { position: absolute; top: 0; left: 0; right: 0; bottom: 30px; pointer-events: none; }
+  .ln-over svg { width: 100%; height: 100%; }
 
-  /* DATE AXIS */
-  .date-axis { display: flex; gap: 2px; padding-top: 4px; }
-  .date-axis-cell { flex: 1; text-align: center; font-size: 10px; color: #94a3b8; }
+  /* ========== SECTION HEADING ========== */
+  .s-heading { font-size: 14px; font-weight: 700; color: #191b22; padding: 12px 14px 6px; }
 
-  /* SUB TABS (tabbed containers) */
-  .sub-tabs { display: flex; gap: 0; border-bottom: 1px solid #e2e8f0; background: #fafbfc; }
-  .sub-tab { padding: 8px 16px; font-size: 12px; font-weight: 500; color: #8895a7; cursor: pointer; border-bottom: 2px solid transparent; }
-  .sub-tab:hover { color: #4a5568; }
-  .sub-tab.active { color: #4e79a7; border-bottom-color: #4e79a7; font-weight: 600; background: #fff; }
-  .sub-tab-content { display: none; }
-  .sub-tab-content.active { display: block; }
+  /* ========== SUB TABS (tabbed containers) ========== */
+  .s-tabs { display: flex; gap: 0; border-bottom: 1px solid #e0e0e0; background: #fafafa; }
+  .s-tab {
+    padding: 8px 16px; font-size: 12px; font-weight: 500; color: #888;
+    cursor: pointer; border-bottom: 2px solid transparent;
+  }
+  .s-tab:hover { color: #555; }
+  .s-tab.active { color: #3b82f6; border-bottom-color: #3b82f6; font-weight: 600; background: #fff; }
+  .s-tab-body { display: none; }
+  .s-tab-body.active { display: block; }
 
-  /* DONUT + BAR breakdown */
-  .breakdown-layout { display: flex; padding: 16px; gap: 16px; }
-  .donut-wrap { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
-  .donut-svg-wrap { width: 150px; height: 150px; position: relative; }
-  .donut-svg-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
-  .donut-center .val { font-size: 16px; font-weight: 700; color: #1a202c; }
-  .donut-center .lbl { font-size: 9px; color: #94a3b8; }
-  .breakdown-chart { flex: 1; display: flex; flex-direction: column; }
+  /* ========== DONUT + STACKED ========== */
+  .bk-row { display: flex; padding: 14px; gap: 14px; }
+  .donut-col { width: 180px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .donut-box { width: 140px; height: 140px; position: relative; }
+  .donut-box svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .donut-mid {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    text-align: center;
+  }
+  .donut-mid .v { font-size: 15px; font-weight: 700; color: #191b22; }
+  .donut-mid .l { font-size: 9px; color: #aaa; }
+  .bk-chart { flex: 1; display: flex; flex-direction: column; }
 
-  /* LINE CHART (pricing) */
-  .line-chart-wrap { padding: 16px; }
-  .line-chart-box { height: 180px; position: relative; }
-  .line-chart-box svg { width: 100%; height: 100%; }
+  /* ========== LINE CHART ========== */
+  .line-box { height: 170px; }
+  .line-box svg { width: 100%; height: 100%; }
+  .two-line { display: grid; grid-template-columns: 1fr 1fr; }
+  .two-line > div { padding: 14px; }
+  .two-line > div + div { border-left: 1px solid #ececec; }
+  .line-title { font-size: 12px; font-weight: 600; color: #555; margin-bottom: 8px; }
 
-  /* TWO-COL for pricing */
-  .two-col-layout { display: grid; grid-template-columns: 1fr 1fr; }
-  .two-col-layout > div { padding: 16px; }
-  .two-col-layout > div + div { border-left: 1px solid #edf2f7; }
+  /* ========== DATA TABLE ========== */
+  .dtbl { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .dtbl th {
+    text-align: right; font-size: 10px; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.4px;
+    padding: 6px 8px; border-bottom: 1px solid #e0e0e0;
+  }
+  .dtbl th:first-child { text-align: left; }
+  .dtbl td {
+    padding: 5px 8px; font-size: 11px; color: #444;
+    border-bottom: 1px solid #f2f2f2; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .dtbl td:first-child { text-align: left; color: #777; font-weight: 500; }
 
-  /* FUNNEL */
-  .sigma-funnel { padding: 16px; display: flex; flex-direction: column; gap: 4px; }
-  .funnel-row { display: flex; align-items: center; }
-  .funnel-label { width: 200px; text-align: right; padding-right: 14px; font-size: 11px; color: #4a5568; font-family: monospace; }
-  .funnel-bar-wrap { flex: 1; display: flex; justify-content: center; padding: 2px 0; }
-  .funnel-bar { height: 36px; border-radius: 3px; display: flex; align-items: center; justify-content: center; }
-  .funnel-bar span { font-size: 12px; color: #fff; font-weight: 700; }
-  .funnel-pct { width: 70px; font-size: 11px; font-weight: 600; color: #2d3748; padding-left: 14px; }
+  /* ========== SIGMA TABLE ========== */
+  .s-table { width: 100%; border-collapse: collapse; }
+  .s-table th {
+    text-align: left; font-size: 11px; font-weight: 600; color: #666;
+    padding: 8px 12px; border-bottom: 2px solid #e0e0e0;
+  }
+  .s-table td { padding: 7px 12px; font-size: 12px; color: #333; border-bottom: 1px solid #f2f2f2; }
+  .s-table .n { text-align: right; font-variant-numeric: tabular-nums; }
+  .s-table th.n { text-align: right; }
+  .s-table tbody tr:hover { background: #fafafa; }
+  .tbl-sum { font-size: 10px; color: #bbb; margin-top: 6px; }
+  .tbl-wrap { padding: 14px; }
 
-  /* TABLE */
-  .sigma-table { width: 100%; border-collapse: collapse; }
-  .sigma-table th { text-align: left; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; padding: 8px 12px; border-bottom: 2px solid #e2e8f0; background: #fafbfc; }
-  .sigma-table td { padding: 7px 12px; font-size: 12px; color: #2d3748; border-bottom: 1px solid #f0f2f5; }
-  .sigma-table tbody tr:hover { background: #f8fafc; }
-  .sigma-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  /* ========== FUNNEL ========== */
+  .funnel { padding: 14px; }
+  .fn-row { display: flex; align-items: center; margin-bottom: 4px; }
+  .fn-lbl { width: 200px; text-align: right; padding-right: 12px; font-size: 10px; color: #555; font-family: monospace; }
+  .fn-bar-w { flex: 1; display: flex; justify-content: center; }
+  .fn-bar { height: 34px; border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+  .fn-bar span { font-size: 11px; color: #fff; font-weight: 700; }
+  .fn-pct { width: 65px; font-size: 11px; font-weight: 600; color: #444; padding-left: 12px; }
 
-  /* MAP PLACEHOLDER */
-  .map-placeholder { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; height: 220px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; }
+  /* ========== MAP ========== */
+  .map-ph {
+    background: #fafafa; border: 1px dashed #ccc; border-radius: 8px;
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    color: #bbb; font-size: 12px;
+  }
 
-  /* BOTTOM TABS (page tabs) */
-  .bottom-tabs { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e2e8f0; display: flex; z-index: 100; box-shadow: 0 -1px 3px rgba(0,0,0,0.05); }
-  .bottom-tab { padding: 10px 20px; font-size: 12px; font-weight: 500; color: #8895a7; cursor: pointer; border-top: 2px solid transparent; }
-  .bottom-tab:hover { color: #4a5568; }
-  .bottom-tab.active { color: #4e79a7; border-top-color: #4e79a7; font-weight: 600; }
+  /* ========== MULTI-COL ========== */
+  .col2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
 
-  /* TABLE WRAPPER */
-  .table-wrap { padding: 16px; }
-  .table-summary { font-size: 10px; color: #94a3b8; margin-top: 6px; }
+  /* ========== PAGE TABS (bottom) ========== */
+  .page-tabs {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; border-top: 1px solid #e0e0e0;
+    display: flex; z-index: 200; box-shadow: 0 -1px 3px rgba(0,0,0,0.04);
+  }
+  .pg-tab {
+    padding: 9px 18px; font-size: 12px; font-weight: 500; color: #888;
+    cursor: pointer; border-top: 2px solid transparent;
+  }
+  .pg-tab:hover { color: #555; }
+  .pg-tab.active { color: #3b82f6; border-top-color: #3b82f6; font-weight: 600; }
 
-  /* REPORTING SECTION */
-  .report-section { padding: 16px; }
-  .report-section + .report-section { border-top: 1px solid #edf2f7; }
-  .report-title { font-size: 14px; font-weight: 700; color: #1a202c; margin-bottom: 10px; }
+  /* ========== REPORT SECTIONS ========== */
+  .rpt-sec { padding: 14px; }
+  .rpt-sec + .rpt-sec { border-top: 1px solid #f0f0f0; }
+  .rpt-title { font-size: 14px; font-weight: 700; color: #191b22; margin-bottom: 10px; }
 
-  /* COLORS */
+  /* ========== SIGMA COLORS ========== */
   :root {
-    --blue1: #4e79a7; --blue2: #74a1c8; --blue3: #a0cbe8;
-    --teal1: #4a9794; --teal2: #69aaa4; --teal3: #86bcb6;
-    --gray1: #545454; --gray2: #898989; --gray3: #d4d4d4; --gray4: #e2e2e2;
-    --purple1: #c290b4; --purple2: #d4a6c9;
+    --b1:#4e79a7; --b2:#74a1c8; --b3:#a0cbe8;
+    --t1:#4a9794; --t2:#69aaa4; --t3:#86bcb6;
+    --g1:#898989; --g2:#d4d4d4; --g3:#e2e2e2;
+    --p1:#c290b4; --p2:#d4a6c9;
+    --gold:#f0c75e; --orange:#e8845c;
   }
 </style>
 </head>
 <body>
 
-<!-- SIGMA HEADER -->
+<!-- ===== SIGMA HEADER ===== -->
 <div class="sigma-header">
   <div class="sigma-header-left">
-    <div class="sigma-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16l-8 8 8 8H4l8-8z"/></svg></div>
-    <span class="sigma-title">[External] Partner Metrics Dashboard</span>
+    <div class="sigma-logo"><svg viewBox="0 0 24 24"><path d="M4 4h16l-8 8 8 8H4l8-8z"/></svg></div>
+    <span class="wb-title">[External] Partner Metrics Dashboard</span>
+    <span class="wb-edit">Edit</span>
   </div>
   <div class="sigma-header-right">
-    <button class="sigma-btn">&#128339; Schedule</button>
-    <button class="sigma-btn">Share</button>
-    <button class="sigma-btn sigma-btn-primary">&#8595; Export</button>
+    <button class="hdr-btn">Schedule</button>
+    <button class="hdr-btn">Share</button>
+    <button class="hdr-btn primary">Export</button>
   </div>
 </div>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <div class="filter-item">
-    <span class="filter-label">Date Range</span>
-    <div class="filter-value">
-      <span class="filter-icon">&#128197;</span>
-      On or after 05/01/2026
-      <span class="filter-x">&times;</span>
-    </div>
+<!-- ===== CONTROLS ===== -->
+<div class="controls-row">
+  <div class="ctrl">
+    <span class="ctrl-label">Date Range</span>
+    <div class="ctrl-pill">&#128197; On or after 05/01/2026 <span class="x">&times;</span></div>
   </div>
-  <div class="filter-item">
-    <span class="filter-label">Date Granularity</span>
-    <div class="granularity-toggle">
+  <div class="ctrl">
+    <span class="ctrl-label">Date Granularity</span>
+    <div class="gran-toggle">
       <button class="gran-btn">Day</button>
       <button class="gran-btn">Week</button>
       <button class="gran-btn active">Month</button>
     </div>
   </div>
-  <div class="filter-item">
-    <span class="filter-label">Partner Name</span>
-    <select class="filter-select"><option>Select partner</option></select>
-  </div>
-  <div class="filter-item">
-    <span class="filter-label">Utm Source</span>
-    <select class="filter-select"><option>Select values</option></select>
-  </div>
-  <div class="filter-item">
-    <span class="filter-label">Channel</span>
-    <select class="filter-select"><option>Select values</option></select>
-  </div>
-  <div class="filter-item">
-    <span class="filter-label">Credit Score Band</span>
-    <select class="filter-select"><option>Select values</option></select>
-  </div>
+  <div class="ctrl"><span class="ctrl-label">Partner Name</span><select class="ctrl-select"><option>Select partner</option></select></div>
+  <div class="ctrl"><span class="ctrl-label">Utm Source</span><select class="ctrl-select"><option>Select values</option></select></div>
+  <div class="ctrl"><span class="ctrl-label">Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
+  <div class="ctrl"><span class="ctrl-label">Credit Score Band</span><select class="ctrl-select"><option>Select values</option></select></div>
 </div>
 
-<div class="main-content">
+<div class="page-content">
 
-<!-- ===================== APPLICATIONS ===================== -->
-<div class="tab-content active" id="tab-applications">
+<!-- ==================== APPLICATIONS ==================== -->
+<div class="tab-page active" id="pg-applications">
 
-  <!-- Container 1: KPIs sidebar + Application Metrics combo chart -->
-  <div class="sigma-container">
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Submitted (#)</div>
-          <div class="kpi-value">18,470</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Underwritten (#)</div>
-          <div class="kpi-value">15,610</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">TTD Approval Rate (%)</div>
-          <div class="kpi-value">73.9%</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Approved (#)</div>
-          <div class="kpi-value">11,530</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Offer Accept Rate (%)</div>
-          <div class="kpi-value">92.6%</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Booked (#)</div>
-          <div class="kpi-value">10,680</div>
-        </div>
+  <!-- Container 1: KPI sidebar + Application Metrics combo -->
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Submitted (#)</div><div class="kpi-val">18,470</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Underwritten (#)</div><div class="kpi-val">15,610</div></div>
+        <div class="kpi-cell"><div class="kpi-name">TTD Approval Rate (%)</div><div class="kpi-val">73.9%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Approved (#)</div><div class="kpi-val">11,530</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Offer Accept Rate (%)</div><div class="kpi-val">92.6%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Booked (#)</div><div class="kpi-val">10,680</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="app-metrics-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Submitted</div>
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Underwritten</div>
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue3);"></div>Approved</div>
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--teal1);"></div>Booked</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--gray1);"></div>TTD Approval Rate</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="app-combo"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,105 150,100 250,95 350,90 450,85 550,82 650,78 750,72 850,76 950,78" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
         </div>
+        <div class="ax" id="app-combo-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Submitted</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Underwritten</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Approved</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--gold)"></div>Booked</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--orange)"></div>TTD Approval Rate</div>
+        </div>
+        <table class="dtbl">
+          <thead><tr><th></th><th>MAY 31</th><th>JUN 30</th><th>JUL 31</th><th>AUG 31</th><th>SEP 30</th><th>OCT 31</th><th>NOV 30</th><th>DEC 31</th><th>JAN 31</th><th>FEB 28</th></tr></thead>
+          <tbody>
+            <tr><td>Submitted (#)</td><td>1,040</td><td>1,310</td><td>1,560</td><td>1,780</td><td>1,910</td><td>2,050</td><td>2,190</td><td>2,340</td><td>2,170</td><td>2,120</td></tr>
+            <tr><td>Underwritten (#)</td><td>870</td><td>1,100</td><td>1,310</td><td>1,500</td><td>1,610</td><td>1,720</td><td>1,840</td><td>1,970</td><td>1,830</td><td>1,780</td></tr>
+            <tr><td>Approved (#)</td><td>640</td><td>810</td><td>960</td><td>1,100</td><td>1,180</td><td>1,260</td><td>1,350</td><td>1,440</td><td>1,340</td><td>1,310</td></tr>
+            <tr><td>Booked (#)</td><td>590</td><td>750</td><td>890</td><td>1,020</td><td>1,090</td><td>1,170</td><td>1,250</td><td>1,330</td><td>1,240</td><td>1,210</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <!-- Container 2: APR KPIs sidebar + Avg APR & Credit Limit combo -->
-  <div class="sigma-container">
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Conversion Rate (%)</div>
-          <div class="kpi-value">57.8%</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Avg APR (%)</div>
-          <div class="kpi-value">27.8%</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Avg Credit Limit ($)</div>
-          <div class="kpi-value">$4,250</div>
-        </div>
+  <!-- Container 2: APR/CL KPIs sidebar + combo -->
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Conversion Rate (%)</div><div class="kpi-val">57.8%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Avg APR (%)</div><div class="kpi-val">27.8%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Avg Credit Limit ($)</div><div class="kpi-val">$4,250</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="app-apr-cl-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Avg Credit Limit ($)</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--teal1);"></div>Avg APR (%)</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="app-apr-cl"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,115 150,110 250,105 350,100 450,95 550,90 650,86 750,82 850,84 950,86" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round"/>
+          </svg></div>
         </div>
+        <div class="ax" id="app-apr-cl-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Avg Credit Limit ($)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--orange)"></div>Avg APR (%)</div>
+        </div>
+        <table class="dtbl">
+          <thead><tr><th></th><th>MAY 31</th><th>JUN 30</th><th>JUL 31</th><th>AUG 31</th><th>SEP 30</th><th>OCT 31</th><th>NOV 30</th><th>DEC 31</th><th>JAN 31</th><th>FEB 28</th></tr></thead>
+          <tbody>
+            <tr><td>Avg Credit Limit ($)</td><td>$3,710</td><td>$3,820</td><td>$3,940</td><td>$4,050</td><td>$4,120</td><td>$4,180</td><td>$4,240</td><td>$4,310</td><td>$4,270</td><td>$4,250</td></tr>
+            <tr><td>Avg APR (%)</td><td>29.4%</td><td>29.1%</td><td>28.7%</td><td>28.4%</td><td>28.2%</td><td>28.0%</td><td>27.8%</td><td>27.6%</td><td>27.7%</td><td>27.8%</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <!-- Container 3: New added accounts (tabbed: By Credit Score Band / By Channel) -->
-  <div class="sigma-container">
-    <div class="section-heading">New added accounts</div>
-    <div class="sub-tabs" data-group="app-accounts">
-      <div class="sub-tab active" onclick="switchSubTab(this, 'app-accounts')">By Credit Score Band</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'app-accounts')">By Channel</div>
+  <!-- Container 3: "New added accounts" + tabbed donut/bar -->
+  <div class="s-container">
+    <div class="s-heading">New added accounts</div>
+    <div class="s-tabs" data-g="app-na">
+      <div class="s-tab active" onclick="stab(this,'app-na')">By Credit Score Band</div>
+      <div class="s-tab" onclick="stab(this,'app-na')">By Channel</div>
     </div>
-    <!-- Tab 1: By Credit Score Band -->
-    <div class="sub-tab-content active" data-group="app-accounts">
-      <div class="breakdown-layout">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
+    <div class="s-tab-body active" data-g="app-na">
+      <div class="bk-row">
+        <div class="donut-col">
+          <div class="donut-box">
             <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue1)" stroke-width="4" stroke-dasharray="30 70"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue2)" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-30"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue3)" stroke-width="4" stroke-dasharray="20 80" stroke-dashoffset="-55"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--gray2)" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-75"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--gray3)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-90"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b1)" stroke-width="4" stroke-dasharray="30 70"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b2)" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-30"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b3)" stroke-width="4" stroke-dasharray="20 80" stroke-dashoffset="-55"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--g1)" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-75"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--g2)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-90"/>
             </svg>
-            <div class="donut-center"><div class="val">10.7K</div><div class="lbl">Total</div></div>
+            <div class="donut-mid"><div class="v">10.7K</div><div class="l">Total</div></div>
           </div>
-          <div class="legend-row" style="flex-direction:column;gap:4px;margin-top:10px;">
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Super-prime (720+) 30%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Prime (660-719) 25%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue3);"></div>Near-prime (620-659) 20%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--gray2);"></div>Subprime (580-619) 15%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--gray3);"></div>No Score 10%</div>
+          <div class="leg" style="flex-direction:column;gap:3px;margin-top:8px;">
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Super-prime 30%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Prime 25%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Near-prime 20%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--g1)"></div>Subprime 15%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--g2)"></div>No Score 10%</div>
           </div>
         </div>
-        <div class="breakdown-chart">
-          <div class="bar-chart" id="app-csb-stacked" style="min-height:180px;"></div>
-          <div class="date-axis" id="app-csb-axis"></div>
+        <div class="bk-chart">
+          <div class="bars" id="na-csb" style="min-height:160px;"></div>
+          <div class="ax" id="na-csb-ax"></div>
         </div>
       </div>
     </div>
-    <!-- Tab 2: By Channel -->
-    <div class="sub-tab-content" data-group="app-accounts">
-      <div class="breakdown-layout">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
+    <div class="s-tab-body" data-g="app-na">
+      <div class="bk-row">
+        <div class="donut-col">
+          <div class="donut-box">
             <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue2)" stroke-width="4" stroke-dasharray="35 65"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue1)" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-35"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue3)" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-60"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--teal1)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-75"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--teal2)" stroke-width="4" stroke-dasharray="8 92" stroke-dashoffset="-85"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--purple1)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b2)" stroke-width="4" stroke-dasharray="35 65"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b1)" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-35"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b3)" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-60"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--t1)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-75"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--t2)" stroke-width="4" stroke-dasharray="8 92" stroke-dashoffset="-85"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--p1)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
             </svg>
-            <div class="donut-center"><div class="val">10.7K</div><div class="lbl">Total</div></div>
+            <div class="donut-mid"><div class="v">10.7K</div><div class="l">Total</div></div>
           </div>
-          <div class="legend-row" style="flex-direction:column;gap:4px;margin-top:10px;">
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Digital 35%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Direct Mail 25%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue3);"></div>Email 15%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--teal1);"></div>No Source 10%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--teal2);"></div>On-Premises 8%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--purple1);"></div>Other 7%</div>
+          <div class="leg" style="flex-direction:column;gap:3px;margin-top:8px;">
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Digital 35%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Direct Mail 25%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Email 15%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--t1)"></div>No Source 10%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--t2)"></div>On-Premises 8%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--p1)"></div>Other 7%</div>
           </div>
         </div>
-        <div class="breakdown-chart">
-          <div class="bar-chart" id="app-channel-stacked" style="min-height:180px;"></div>
-          <div class="date-axis" id="app-channel-axis"></div>
+        <div class="bk-chart">
+          <div class="bars" id="na-ch" style="min-height:160px;"></div>
+          <div class="ax" id="na-ch-ax"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Container 4: Pricing at origination (tabbed: By Credit Score Band / By Channel) -->
-  <div class="sigma-container">
-    <div class="section-heading">Pricing at origination</div>
-    <div class="sub-tabs" data-group="app-pricing">
-      <div class="sub-tab active" onclick="switchSubTab(this, 'app-pricing')">By Credit Score Band</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'app-pricing')">By Channel</div>
+  <!-- Container 4: "Pricing at origination" + tabbed line charts -->
+  <div class="s-container">
+    <div class="s-heading">Pricing at origination</div>
+    <div class="s-tabs" data-g="app-pr">
+      <div class="s-tab active" onclick="stab(this,'app-pr')">By Credit Score Band</div>
+      <div class="s-tab" onclick="stab(this,'app-pr')">By Channel</div>
     </div>
-    <div class="sub-tab-content active" data-group="app-pricing">
-      <div class="two-col-layout">
+    <div class="s-tab-body active" data-g="app-pr">
+      <div class="two-line">
         <div>
-          <div style="font-size:12px;font-weight:600;color:#4a5568;margin-bottom:8px;">Avg APR (%)</div>
-          <div class="line-chart-box">
-            <svg viewBox="0 0 300 160" preserveAspectRatio="none">
-              <polyline points="10,120 40,110 70,100 100,90 130,85 160,80 190,75 220,70 250,68 280,65" fill="none" stroke="var(--blue1)" stroke-width="2"/>
-              <polyline points="10,80 40,75 70,72 100,68 130,65 160,60 190,58 220,55 250,52 280,50" fill="none" stroke="var(--blue2)" stroke-width="2"/>
-              <polyline points="10,140 40,135 70,130 100,125 130,120 160,118 190,115 220,112 250,110 280,108" fill="none" stroke="var(--blue3)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="legend-row">
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue1);"></div>Super-prime</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue2);"></div>Prime</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue3);"></div>Near-prime</div>
+          <div class="line-title">Avg APR (%)</div>
+          <div class="line-box"><svg viewBox="0 0 300 150" preserveAspectRatio="none">
+            <polyline points="15,100 45,95 75,88 105,82 135,78 165,74 195,70 225,66 255,68 285,70" fill="none" stroke="var(--b1)" stroke-width="2.5"/>
+            <polyline points="15,70 45,66 75,62 105,58 135,55 165,52 195,48 225,45 255,47 285,48" fill="none" stroke="var(--b2)" stroke-width="2.5"/>
+            <polyline points="15,120 45,116 75,112 105,108 135,105 165,102 195,100 225,98 255,99 285,100" fill="none" stroke="var(--b3)" stroke-width="2.5"/>
+          </svg></div>
+          <div class="leg">
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b1)"></div>Super-prime</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b2)"></div>Prime</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b3)"></div>Near-prime</div>
           </div>
         </div>
         <div>
-          <div style="font-size:12px;font-weight:600;color:#4a5568;margin-bottom:8px;">Avg Credit Limit ($)</div>
-          <div class="line-chart-box">
-            <svg viewBox="0 0 300 160" preserveAspectRatio="none">
-              <polyline points="10,40 40,38 70,35 100,32 130,30 160,28 190,26 220,24 250,22 280,20" fill="none" stroke="var(--blue1)" stroke-width="2"/>
-              <polyline points="10,80 40,76 70,72 100,68 130,66 160,64 190,60 220,58 250,56 280,54" fill="none" stroke="var(--blue2)" stroke-width="2"/>
-              <polyline points="10,110 40,108 70,105 100,102 130,100 160,98 190,96 220,94 250,93 280,92" fill="none" stroke="var(--blue3)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="legend-row">
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue1);"></div>Super-prime</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue2);"></div>Prime</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue3);"></div>Near-prime</div>
+          <div class="line-title">Avg Credit Limit ($)</div>
+          <div class="line-box"><svg viewBox="0 0 300 150" preserveAspectRatio="none">
+            <polyline points="15,30 45,28 75,25 105,22 135,20 165,18 195,16 225,14 255,15 285,16" fill="none" stroke="var(--b1)" stroke-width="2.5"/>
+            <polyline points="15,65 45,62 75,58 105,55 135,52 165,50 195,48 225,46 255,47 285,48" fill="none" stroke="var(--b2)" stroke-width="2.5"/>
+            <polyline points="15,95 45,93 75,90 105,88 135,86 165,85 195,84 225,83 255,83 285,84" fill="none" stroke="var(--b3)" stroke-width="2.5"/>
+          </svg></div>
+          <div class="leg">
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b1)"></div>Super-prime</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b2)"></div>Prime</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b3)"></div>Near-prime</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="sub-tab-content" data-group="app-pricing">
-      <div class="two-col-layout">
+    <div class="s-tab-body" data-g="app-pr">
+      <div class="two-line">
         <div>
-          <div style="font-size:12px;font-weight:600;color:#4a5568;margin-bottom:8px;">Avg APR (%) by Channel</div>
-          <div class="line-chart-box">
-            <svg viewBox="0 0 300 160" preserveAspectRatio="none">
-              <polyline points="10,90 40,85 70,80 100,78 130,75 160,72 190,70 220,68 250,66 280,65" fill="none" stroke="var(--blue2)" stroke-width="2"/>
-              <polyline points="10,100 40,96 70,92 100,88 130,85 160,82 190,80 220,78 250,76 280,74" fill="none" stroke="var(--blue1)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="legend-row">
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue2);"></div>Digital</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue1);"></div>Direct Mail</div>
+          <div class="line-title">Avg APR (%) by Channel</div>
+          <div class="line-box"><svg viewBox="0 0 300 150" preserveAspectRatio="none">
+            <polyline points="15,85 45,80 75,76 105,72 135,68 165,65 195,62 225,60 255,61 285,62" fill="none" stroke="var(--b2)" stroke-width="2.5"/>
+            <polyline points="15,95 45,90 75,86 105,82 135,78 165,75 195,72 225,70 255,71 285,72" fill="none" stroke="var(--b1)" stroke-width="2.5"/>
+          </svg></div>
+          <div class="leg">
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b2)"></div>Digital</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b1)"></div>Direct Mail</div>
           </div>
         </div>
         <div>
-          <div style="font-size:12px;font-weight:600;color:#4a5568;margin-bottom:8px;">Avg Credit Limit ($) by Channel</div>
-          <div class="line-chart-box">
-            <svg viewBox="0 0 300 160" preserveAspectRatio="none">
-              <polyline points="10,60 40,56 70,52 100,48 130,46 160,44 190,42 220,40 250,38 280,36" fill="none" stroke="var(--blue2)" stroke-width="2"/>
-              <polyline points="10,80 40,76 70,72 100,68 130,66 160,64 190,62 220,60 250,58 280,56" fill="none" stroke="var(--blue1)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="legend-row">
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue2);"></div>Digital</div>
-            <div class="legend-chip"><div class="legend-line" style="background:var(--blue1);"></div>Direct Mail</div>
+          <div class="line-title">Avg Credit Limit ($) by Channel</div>
+          <div class="line-box"><svg viewBox="0 0 300 150" preserveAspectRatio="none">
+            <polyline points="15,50 45,46 75,42 105,38 135,36 165,34 195,32 225,30 255,31 285,32" fill="none" stroke="var(--b2)" stroke-width="2.5"/>
+            <polyline points="15,70 45,66 75,62 105,58 135,56 165,54 195,52 225,50 255,51 285,52" fill="none" stroke="var(--b1)" stroke-width="2.5"/>
+          </svg></div>
+          <div class="leg">
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b2)"></div>Digital</div>
+            <div class="leg-item"><div class="leg-ln" style="background:var(--b1)"></div>Direct Mail</div>
           </div>
         </div>
       </div>
@@ -411,330 +468,252 @@
   </div>
 
   <!-- Application Funnel -->
-  <div class="sigma-container">
-    <div class="section-heading">Application Funnel</div>
-    <div class="sigma-funnel">
-      <div class="funnel-row">
-        <div class="funnel-label">lets_get_started_viewed</div>
-        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%;background:var(--blue1);"><span>97.20k</span></div></div>
-        <div class="funnel-pct">100.00%</div>
-      </div>
-      <div class="funnel-row">
-        <div class="funnel-label">personal_info_viewed</div>
-        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:58%;background:var(--blue2);"><span>56.67k</span></div></div>
-        <div class="funnel-pct">58.30%</div>
-      </div>
-      <div class="funnel-row">
-        <div class="funnel-label">income_housing_viewed</div>
-        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:55%;background:var(--blue1);"><span>53.54k</span></div></div>
-        <div class="funnel-pct">94.47%</div>
-      </div>
-      <div class="funnel-row">
-        <div class="funnel-label">offer_viewed</div>
-        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:13%;background:var(--teal2);"><span>7.26k</span></div></div>
-        <div class="funnel-pct">12.80%</div>
-      </div>
+  <div class="s-container">
+    <div class="s-heading">Application Funnel</div>
+    <div class="funnel">
+      <div class="fn-row"><div class="fn-lbl">lets_get_started_viewed</div><div class="fn-bar-w"><div class="fn-bar" style="width:100%;background:var(--b1);"><span>97.20k</span></div></div><div class="fn-pct">100.00%</div></div>
+      <div class="fn-row"><div class="fn-lbl">personal_info_viewed</div><div class="fn-bar-w"><div class="fn-bar" style="width:58%;background:var(--b2);"><span>56.67k</span></div></div><div class="fn-pct">58.30%</div></div>
+      <div class="fn-row"><div class="fn-lbl">income_housing_viewed</div><div class="fn-bar-w"><div class="fn-bar" style="width:55%;background:var(--b1);"><span>53.54k</span></div></div><div class="fn-pct">94.47%</div></div>
+      <div class="fn-row"><div class="fn-lbl">offer_viewed</div><div class="fn-bar-w"><div class="fn-bar" style="width:13%;background:var(--t2);"><span>7.26k</span></div></div><div class="fn-pct">12.80%</div></div>
     </div>
   </div>
 
 </div>
 
-<!-- ===================== TRANSACTION ===================== -->
-<div class="tab-content" id="tab-transaction">
+<!-- ==================== TRANSACTION ==================== -->
+<div class="tab-page" id="pg-transaction">
 
-  <!-- Container 1: KPIs + Net Settled Volume combo -->
-  <div class="sigma-container">
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Net Settled Volume ($)</div>
-          <div class="kpi-value">$97.4M</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Net Settled Volume per PAA ($)</div>
-          <div class="kpi-value">$1,526</div>
-        </div>
+  <!-- Container 1: KPI sidebar + Net Settled Volume combo -->
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Net Settled Volume ($)</div><div class="kpi-val">$97.4M</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Net Settled Volume per PAA ($)</div><div class="kpi-val">$1,526</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="txn-vol-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Net Settled Volume ($)</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--gray1);"></div>Net Settled $ per PAA</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="txn-vol"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,110 150,105 250,95 350,85 450,78 550,72 650,66 750,58 850,65 950,70" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></div>
+        </div>
+        <div class="ax" id="txn-vol-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Net Settled Volume ($)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:#333"></div>Net Settled $ per PAA</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Container 2: KPIs + Settled Transactions combo -->
-  <div class="sigma-container">
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Settled Transactions (#)</div>
-          <div class="kpi-value">412,635</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Avg Transaction Size ($)</div>
-          <div class="kpi-value">$236</div>
-        </div>
+  <!-- Container 2: KPI sidebar + Settled Transactions combo -->
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Settled Transactions (#)</div><div class="kpi-val">412,635</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Avg Transaction Size ($)</div><div class="kpi-val">$236</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="txn-settled-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Settled Transactions (#)</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--gray1);"></div>Avg Transaction Size ($)</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="txn-cnt"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,90 150,86 250,82 350,78 450,76 550,74 650,70 750,64 850,72 950,76" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Container 3: Net settled volume breakdown (tabbed) -->
-  <div class="sigma-container">
-    <div class="section-heading">Net settled volume ($) breakdown</div>
-    <div class="sub-tabs" data-group="txn-breakdown">
-      <div class="sub-tab active" onclick="switchSubTab(this, 'txn-breakdown')">By purchase method</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'txn-breakdown')">By card type</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'txn-breakdown')">By on/off merchant</div>
-    </div>
-    <!-- By purchase method -->
-    <div class="sub-tab-content active" data-group="txn-breakdown">
-      <div class="breakdown-layout">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue1)" stroke-width="4" stroke-dasharray="42 58"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue2)" stroke-width="4" stroke-dasharray="28 72" stroke-dashoffset="-42"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue3)" stroke-width="4" stroke-dasharray="8 92" stroke-dashoffset="-70"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--teal1)" stroke-width="4" stroke-dasharray="5 95" stroke-dashoffset="-78"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--teal2)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-83"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--gray3)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
-            </svg>
-            <div class="donut-center"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-          </div>
-          <div class="legend-row" style="flex-direction:column;gap:4px;margin-top:10px;">
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Online 42%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Contactless 28%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue3);"></div>Chip 8%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--teal1);"></div>KeyedIn 5%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--teal2);"></div>Swipe 10%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--gray3);"></div>Unknown 7%</div>
-          </div>
-        </div>
-        <div class="breakdown-chart">
-          <div class="bar-chart" id="txn-method-stacked" style="min-height:180px;"></div>
-          <div class="date-axis" id="txn-method-axis"></div>
-        </div>
-      </div>
-    </div>
-    <!-- By card type -->
-    <div class="sub-tab-content" data-group="txn-breakdown">
-      <div class="breakdown-layout">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue1)" stroke-width="4" stroke-dasharray="63 37"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue2)" stroke-width="4" stroke-dasharray="37 63" stroke-dashoffset="-63"/>
-            </svg>
-            <div class="donut-center"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-          </div>
-          <div class="legend-row" style="flex-direction:column;gap:4px;margin-top:10px;">
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>PHYSICAL 63%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>VIRTUAL 37%</div>
-          </div>
-        </div>
-        <div class="breakdown-chart">
-          <div class="bar-chart" id="txn-card-stacked" style="min-height:180px;"></div>
-          <div class="date-axis" id="txn-card-axis"></div>
-        </div>
-      </div>
-    </div>
-    <!-- By on/off merchant -->
-    <div class="sub-tab-content" data-group="txn-breakdown">
-      <div class="breakdown-layout">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue1)" stroke-width="4" stroke-dasharray="55 45"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--blue2)" stroke-width="4" stroke-dasharray="45 55" stroke-dashoffset="-55"/>
-            </svg>
-            <div class="donut-center"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-          </div>
-          <div class="legend-row" style="flex-direction:column;gap:4px;margin-top:10px;">
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>On-Merchant 55%</div>
-            <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Off-Merchant 45%</div>
-          </div>
-        </div>
-        <div class="breakdown-chart">
-          <div class="bar-chart" id="txn-onoff-stacked" style="min-height:180px;"></div>
-          <div class="date-axis" id="txn-onoff-axis"></div>
+        <div class="ax" id="txn-cnt-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Settled Transactions (#)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:#333"></div>Avg Transaction Size ($)</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Container 4: Merchant spend (tabbed) -->
-  <div class="sigma-container">
-    <div class="section-heading">Merchant spend</div>
-    <div class="sub-tabs" data-group="txn-merchant">
-      <div class="sub-tab active" onclick="switchSubTab(this, 'txn-merchant')">Top merchants</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'txn-merchant')">Top categories</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'txn-merchant')">Top states</div>
-      <div class="sub-tab" onclick="switchSubTab(this, 'txn-merchant')">Top country</div>
+  <!-- Container 3: "Net settled volume breakdown" tabbed -->
+  <div class="s-container">
+    <div class="s-heading">Net settled volume ($) breakdown</div>
+    <div class="s-tabs" data-g="txn-bk">
+      <div class="s-tab active" onclick="stab(this,'txn-bk')">By purchase method</div>
+      <div class="s-tab" onclick="stab(this,'txn-bk')">By card type</div>
+      <div class="s-tab" onclick="stab(this,'txn-bk')">By on/off merchant</div>
     </div>
-    <!-- Top merchants -->
-    <div class="sub-tab-content active" data-group="txn-merchant">
-      <div class="table-wrap">
-        <table class="sigma-table">
-          <thead><tr><th>Merchant Name</th><th class="num">Net Settled Volume ($)</th><th class="num">Txns (#)</th></tr></thead>
-          <tbody>
-            <tr><td>WALMART</td><td class="num">$9,724,350</td><td class="num">38,260</td></tr>
-            <tr><td>AMAZON.COM</td><td class="num">$8,951,670</td><td class="num">41,310</td></tr>
-            <tr><td>COSTCO WHOLESALE</td><td class="num">$6,012,480</td><td class="num">18,830</td></tr>
-            <tr><td>TARGET</td><td class="num">$5,718,940</td><td class="num">23,360</td></tr>
-            <tr><td>ALDI</td><td class="num">$4,247,610</td><td class="num">22,110</td></tr>
-            <tr><td>HOME DEPOT</td><td class="num">$3,951,230</td><td class="num">10,370</td></tr>
-            <tr><td>WALGREENS</td><td class="num">$2,528,390</td><td class="num">13,770</td></tr>
-            <tr><td>BESTBUY.COM</td><td class="num">$2,375,140</td><td class="num">6,860</td></tr>
-            <tr><td>CVS PHARMACY</td><td class="num">$2,287,610</td><td class="num">12,510</td></tr>
-            <tr><td>MCDONALD'S</td><td class="num">$2,187,740</td><td class="num">16,590</td></tr>
-          </tbody>
-        </table>
-        <div class="table-summary">SUMMARY: 10 of 873 rows | 3 columns</div>
+    <div class="s-tab-body active" data-g="txn-bk">
+      <div class="bk-row">
+        <div class="donut-col">
+          <div class="donut-box"><svg viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b1)" stroke-width="4" stroke-dasharray="42 58"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b2)" stroke-width="4" stroke-dasharray="28 72" stroke-dashoffset="-42"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b3)" stroke-width="4" stroke-dasharray="8 92" stroke-dashoffset="-70"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--t1)" stroke-width="4" stroke-dasharray="5 95" stroke-dashoffset="-78"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--t2)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-83"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--g2)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
+          </svg><div class="donut-mid"><div class="v">$97.4M</div><div class="l">Total</div></div></div>
+          <div class="leg" style="flex-direction:column;gap:3px;margin-top:8px;">
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Online 42%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Contactless 28%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Chip 8%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--t1)"></div>KeyedIn 5%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--t2)"></div>Swipe 10%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--g2)"></div>Unknown 7%</div>
+          </div>
+        </div>
+        <div class="bk-chart"><div class="bars" id="txn-pm" style="min-height:160px;"></div><div class="ax" id="txn-pm-ax"></div></div>
       </div>
     </div>
-    <!-- Top categories -->
-    <div class="sub-tab-content" data-group="txn-merchant">
-      <div class="table-wrap">
-        <table class="sigma-table">
-          <thead><tr><th>Category</th><th class="num">Net Settled Volume ($)</th><th class="num">Txns (#)</th></tr></thead>
-          <tbody>
-            <tr><td>Grocery / Supermarket</td><td class="num">$14,612,290</td><td class="num">72,840</td></tr>
-            <tr><td>General Merchandise</td><td class="num">$12,361,510</td><td class="num">48,320</td></tr>
-            <tr><td>Restaurants / Fast Food</td><td class="num">$9,741,530</td><td class="num">62,110</td></tr>
-            <tr><td>Gas / Fuel</td><td class="num">$7,793,220</td><td class="num">38,950</td></tr>
-            <tr><td>Home Improvement</td><td class="num">$6,069,710</td><td class="num">16,970</td></tr>
-            <tr><td>Health / Pharmacy</td><td class="num">$4,815,940</td><td class="num">26,280</td></tr>
-            <tr><td>Online Retail</td><td class="num">$4,593,170</td><td class="num">21,540</td></tr>
-            <tr><td>Auto Parts / Service</td><td class="num">$3,423,050</td><td class="num">10,750</td></tr>
-            <tr><td>Entertainment</td><td class="num">$2,438,820</td><td class="num">14,610</td></tr>
-            <tr><td>Travel / Lodging</td><td class="num">$1,949,470</td><td class="num">5,840</td></tr>
-          </tbody>
-        </table>
-        <div class="table-summary">SUMMARY: 10 of 142 rows | 3 columns</div>
+    <div class="s-tab-body" data-g="txn-bk">
+      <div class="bk-row">
+        <div class="donut-col">
+          <div class="donut-box"><svg viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b1)" stroke-width="4" stroke-dasharray="63 37"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b2)" stroke-width="4" stroke-dasharray="37 63" stroke-dashoffset="-63"/>
+          </svg><div class="donut-mid"><div class="v">$97.4M</div><div class="l">Total</div></div></div>
+          <div class="leg" style="flex-direction:column;gap:3px;margin-top:8px;">
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>PHYSICAL 63%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>VIRTUAL 37%</div>
+          </div>
+        </div>
+        <div class="bk-chart"><div class="bars" id="txn-ct" style="min-height:160px;"></div><div class="ax" id="txn-ct-ax"></div></div>
       </div>
     </div>
-    <!-- Top states -->
-    <div class="sub-tab-content" data-group="txn-merchant">
-      <div class="table-wrap">
-        <div class="map-placeholder">Region Map — Top States by Net Settled Volume</div>
+    <div class="s-tab-body" data-g="txn-bk">
+      <div class="bk-row">
+        <div class="donut-col">
+          <div class="donut-box"><svg viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b1)" stroke-width="4" stroke-dasharray="55 45"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="var(--b2)" stroke-width="4" stroke-dasharray="45 55" stroke-dashoffset="-55"/>
+          </svg><div class="donut-mid"><div class="v">$97.4M</div><div class="l">Total</div></div></div>
+          <div class="leg" style="flex-direction:column;gap:3px;margin-top:8px;">
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>On-Merchant 55%</div>
+            <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Off-Merchant 45%</div>
+          </div>
+        </div>
+        <div class="bk-chart"><div class="bars" id="txn-oo" style="min-height:160px;"></div><div class="ax" id="txn-oo-ax"></div></div>
       </div>
     </div>
-    <!-- Top country -->
-    <div class="sub-tab-content" data-group="txn-merchant">
-      <div class="table-wrap">
-        <div class="map-placeholder">Region Map — Top Countries by Net Settled Volume</div>
+  </div>
+
+  <!-- Container 4: "Merchant spend" tabbed -->
+  <div class="s-container">
+    <div class="s-heading">Merchant spend</div>
+    <div class="s-tabs" data-g="txn-ms">
+      <div class="s-tab active" onclick="stab(this,'txn-ms')">Top merchants</div>
+      <div class="s-tab" onclick="stab(this,'txn-ms')">Top categories</div>
+      <div class="s-tab" onclick="stab(this,'txn-ms')">Top states</div>
+      <div class="s-tab" onclick="stab(this,'txn-ms')">Top country</div>
+    </div>
+    <div class="s-tab-body active" data-g="txn-ms">
+      <div class="tbl-wrap">
+        <table class="s-table"><thead><tr><th>Merchant Name</th><th class="n">Net Settled Volume ($)</th><th class="n">Txns (#)</th></tr></thead>
+        <tbody>
+          <tr><td>WALMART</td><td class="n">$9,724,350</td><td class="n">38,260</td></tr>
+          <tr><td>AMAZON.COM</td><td class="n">$8,951,670</td><td class="n">41,310</td></tr>
+          <tr><td>COSTCO WHOLESALE</td><td class="n">$6,012,480</td><td class="n">18,830</td></tr>
+          <tr><td>TARGET</td><td class="n">$5,718,940</td><td class="n">23,360</td></tr>
+          <tr><td>ALDI</td><td class="n">$4,247,610</td><td class="n">22,110</td></tr>
+          <tr><td>HOME DEPOT</td><td class="n">$3,951,230</td><td class="n">10,370</td></tr>
+          <tr><td>WALGREENS</td><td class="n">$2,528,390</td><td class="n">13,770</td></tr>
+          <tr><td>BESTBUY.COM</td><td class="n">$2,375,140</td><td class="n">6,860</td></tr>
+          <tr><td>CVS PHARMACY</td><td class="n">$2,287,610</td><td class="n">12,510</td></tr>
+          <tr><td>MCDONALD'S</td><td class="n">$2,187,740</td><td class="n">16,590</td></tr>
+        </tbody></table>
+        <div class="tbl-sum">SUMMARY: 10 of 873 rows | 3 columns</div>
       </div>
     </div>
+    <div class="s-tab-body" data-g="txn-ms">
+      <div class="tbl-wrap">
+        <table class="s-table"><thead><tr><th>Category</th><th class="n">Net Settled Volume ($)</th><th class="n">Txns (#)</th></tr></thead>
+        <tbody>
+          <tr><td>Grocery / Supermarket</td><td class="n">$14,612,290</td><td class="n">72,840</td></tr>
+          <tr><td>General Merchandise</td><td class="n">$12,361,510</td><td class="n">48,320</td></tr>
+          <tr><td>Restaurants / Fast Food</td><td class="n">$9,741,530</td><td class="n">62,110</td></tr>
+          <tr><td>Gas / Fuel</td><td class="n">$7,793,220</td><td class="n">38,950</td></tr>
+          <tr><td>Home Improvement</td><td class="n">$6,069,710</td><td class="n">16,970</td></tr>
+        </tbody></table>
+        <div class="tbl-sum">SUMMARY: 5 of 142 rows | 3 columns</div>
+      </div>
+    </div>
+    <div class="s-tab-body" data-g="txn-ms"><div class="tbl-wrap"><div class="map-ph">Region Map — Top States</div></div></div>
+    <div class="s-tab-body" data-g="txn-ms"><div class="tbl-wrap"><div class="map-ph">Region Map — Top Countries</div></div></div>
   </div>
 
 </div>
 
-<!-- ===================== PORTFOLIO ===================== -->
-<div class="tab-content" id="tab-portfolio">
+<!-- ==================== PORTFOLIO ==================== -->
+<div class="tab-page" id="pg-portfolio">
 
   <!-- Container 1: Portfolio Growth -->
-  <div class="sigma-container">
-    <div class="section-heading">Portfolio Growth</div>
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Gross Booked Accounts (#)</div>
-          <div class="kpi-value">82,470</div>
-          <div class="kpi-note">of gross booked</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">New Added Accounts (#)</div>
-          <div class="kpi-value">10,680</div>
-          <div class="kpi-note">by month</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Ever Purchase Active Accounts (#)</div>
-          <div class="kpi-value">71,240</div>
-          <div class="kpi-note">by month</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Ever Purchase Active Rate (%)</div>
-          <div class="kpi-value">90.2%</div>
-          <div class="kpi-note">by month</div>
-        </div>
+  <div class="s-container">
+    <div class="s-heading">Portfolio Growth</div>
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Gross Booked Accounts (#)</div><div class="kpi-val">82,470</div><div class="kpi-sub">of gross booked</div></div>
+        <div class="kpi-cell"><div class="kpi-name">New Added Accounts (#)</div><div class="kpi-val">10,680</div><div class="kpi-sub">by month</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Accounts (#)</div><div class="kpi-val">71,240</div><div class="kpi-sub">by month</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Rate (%)</div><div class="kpi-val">90.2%</div><div class="kpi-sub">by month</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="port-growth-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Gross Booked</div>
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>New Added</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--teal1);"></div>Ever Purchase Active Rate</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="port-growth"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,60 150,55 250,50 350,46 450,42 550,38 650,35 750,32 850,31 950,30" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></div>
+        </div>
+        <div class="ax" id="port-growth-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Gross Booked</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>New Added</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Ever Purchase Active Rate</div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Container 2: Portfolio Activity -->
-  <div class="sigma-container">
-    <div class="section-heading">Portfolio Activity</div>
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Open Accounts (#)</div>
-          <div class="kpi-value">78,930</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Balance Active Accounts (#)</div>
-          <div class="kpi-value">41,520</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Balance Active Rate (%)</div>
-          <div class="kpi-value">52.6%</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Purchase Active Accounts (#)</div>
-          <div class="kpi-value">63,810</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Purchase Active Rate (%)</div>
-          <div class="kpi-value">80.8%</div>
-        </div>
+  <div class="s-container">
+    <div class="s-heading">Portfolio Activity</div>
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Open Accounts (#)</div><div class="kpi-val">78,930</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Balance Active Accounts (#)</div><div class="kpi-val">41,520</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Balance Active Rate (%)</div><div class="kpi-val">52.6%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Purchase Active Accounts (#)</div><div class="kpi-val">63,810</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Purchase Active Rate (%)</div><div class="kpi-val">80.8%</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="port-activity-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Open Accounts</div>
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue2);"></div>Purchase Active</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--teal1);"></div>Purchase Active Rate</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="port-act"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,75 150,70 250,65 350,60 450,55 550,50 650,46 750,42 850,41 950,40" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></div>
+        </div>
+        <div class="ax" id="port-act-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Open Accounts</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Purchase Active</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Purchase Active Rate</div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Container 3: Closed accounts -->
-  <div class="sigma-container">
-    <div class="kpi-chart-layout">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-label">Closed Accounts (#)</div>
-          <div class="kpi-value">1,870</div>
-          <div class="kpi-note">Total count of closed, revoked, and charged-off accounts</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-label">Voluntary Closure Rate (%)</div>
-          <div class="kpi-value">70.1%</div>
-        </div>
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Closed Accounts (#)</div><div class="kpi-val">1,870</div><div class="kpi-sub">Total count of closed, revoked, and charged-off accounts</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Voluntary Closure Rate (%)</div><div class="kpi-val">70.1%</div></div>
       </div>
-      <div class="chart-area">
-        <div class="bar-chart" id="port-closed-bars"></div>
-        <div class="legend-row">
-          <div class="legend-chip"><div class="legend-dot" style="background:var(--blue1);"></div>Closed Accounts</div>
-          <div class="legend-chip"><div class="legend-line" style="background:var(--teal1);"></div>Voluntary Closure Rate</div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="port-closed"></div>
+          <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <polyline points="50,80 150,78 250,75 350,72 450,70 550,68 650,66 750,64 850,65 950,66" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></div>
+        </div>
+        <div class="ax" id="port-closed-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Closed Accounts</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Voluntary Closure Rate</div>
         </div>
       </div>
     </div>
@@ -742,222 +721,125 @@
 
 </div>
 
-<!-- ===================== REPORTING ===================== -->
-<div class="tab-content" id="tab-reporting">
-
-  <div class="sigma-container">
-    <!-- Royalties -->
-    <div class="report-section">
-      <div class="report-title">Royalties</div>
-      <table class="sigma-table">
-        <thead>
-          <tr><th>Report Month Ending</th><th class="num">Total Monthly Net Purchase Volume</th><th class="num">Royalty Rate</th><th class="num">Royalty Amount</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-07-31</td><td class="num">$0.00</td><td class="num">2.00%</td><td class="num">$0.00</td></tr>
-          <tr><td>2025-08-31</td><td class="num">$0.00</td><td class="num">2.00%</td><td class="num">$0.00</td></tr>
-          <tr><td>2025-09-30</td><td class="num">$387,920.00</td><td class="num">2.00%</td><td class="num">$7,758.40</td></tr>
-          <tr><td>2025-10-31</td><td class="num">$3,418,570.00</td><td class="num">2.00%</td><td class="num">$68,371.40</td></tr>
-          <tr><td>2025-11-30</td><td class="num">$8,726,140.00</td><td class="num">2.00%</td><td class="num">$174,522.80</td></tr>
-          <tr><td>2025-12-31</td><td class="num">$11,542,380.00</td><td class="num">2.00%</td><td class="num">$230,847.60</td></tr>
-          <tr><td>2026-01-31</td><td class="num">$10,135,710.00</td><td class="num">2.00%</td><td class="num">$202,714.20</td></tr>
-        </tbody>
-      </table>
+<!-- ==================== REPORTING ==================== -->
+<div class="tab-page" id="pg-reporting">
+  <div class="s-container">
+    <div class="rpt-sec">
+      <div class="rpt-title">Royalties</div>
+      <table class="s-table"><thead><tr><th>Report Month Ending</th><th class="n">Total Monthly Net Purchase Volume</th><th class="n">Royalty Rate</th><th class="n">Royalty Amount</th></tr></thead>
+      <tbody>
+        <tr><td>2025-07-31</td><td class="n">$0.00</td><td class="n">2.00%</td><td class="n">$0.00</td></tr>
+        <tr><td>2025-08-31</td><td class="n">$0.00</td><td class="n">2.00%</td><td class="n">$0.00</td></tr>
+        <tr><td>2025-09-30</td><td class="n">$387,920.00</td><td class="n">2.00%</td><td class="n">$7,758.40</td></tr>
+        <tr><td>2025-10-31</td><td class="n">$3,418,570.00</td><td class="n">2.00%</td><td class="n">$68,371.40</td></tr>
+        <tr><td>2025-11-30</td><td class="n">$8,726,140.00</td><td class="n">2.00%</td><td class="n">$174,522.80</td></tr>
+        <tr><td>2025-12-31</td><td class="n">$11,542,380.00</td><td class="n">2.00%</td><td class="n">$230,847.60</td></tr>
+        <tr><td>2026-01-31</td><td class="n">$10,135,710.00</td><td class="n">2.00%</td><td class="n">$202,714.20</td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Discount / Interchange Rebate -->
-    <div class="report-section">
-      <div class="report-title">Discount / Interchange Rebate</div>
-      <table class="sigma-table">
-        <thead>
-          <tr><th>Report Month Ending</th><th class="num">Total Monthly Net Purchase Volume</th><th class="num">Gross Interchange Fee</th><th class="num">Net Interchange Fee</th><th class="num">Discount Rate</th><th class="num">Discount Amount</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-09-30</td><td class="num">$387,920.00</td><td class="num">$8,341.10</td><td class="num">$7,180.25</td><td class="num">50%</td><td class="num">$3,590.13</td></tr>
-          <tr><td>2025-10-31</td><td class="num">$3,418,570.00</td><td class="num">$73,499.26</td><td class="num">$63,270.14</td><td class="num">50%</td><td class="num">$31,635.07</td></tr>
-          <tr><td>2025-11-30</td><td class="num">$8,726,140.00</td><td class="num">$187,611.81</td><td class="num">$161,481.09</td><td class="num">50%</td><td class="num">$80,740.55</td></tr>
-          <tr><td>2025-12-31</td><td class="num">$11,542,380.00</td><td class="num">$248,161.17</td><td class="num">$213,619.43</td><td class="num">50%</td><td class="num">$106,809.72</td></tr>
-          <tr><td>2026-01-31</td><td class="num">$10,135,710.00</td><td class="num">$217,917.77</td><td class="num">$187,606.40</td><td class="num">50%</td><td class="num">$93,803.20</td></tr>
-        </tbody>
-      </table>
+    <div class="rpt-sec">
+      <div class="rpt-title">Discount / Interchange Rebate</div>
+      <table class="s-table"><thead><tr><th>Report Month Ending</th><th class="n">Net Purchase Volume</th><th class="n">Gross Interchange</th><th class="n">Net Interchange</th><th class="n">Discount Rate</th><th class="n">Discount Amount</th></tr></thead>
+      <tbody>
+        <tr><td>2025-09-30</td><td class="n">$387,920</td><td class="n">$8,341</td><td class="n">$7,180</td><td class="n">50%</td><td class="n">$3,590</td></tr>
+        <tr><td>2025-10-31</td><td class="n">$3,418,570</td><td class="n">$73,499</td><td class="n">$63,270</td><td class="n">50%</td><td class="n">$31,635</td></tr>
+        <tr><td>2025-11-30</td><td class="n">$8,726,140</td><td class="n">$187,612</td><td class="n">$161,481</td><td class="n">50%</td><td class="n">$80,741</td></tr>
+        <tr><td>2025-12-31</td><td class="n">$11,542,380</td><td class="n">$248,161</td><td class="n">$213,619</td><td class="n">50%</td><td class="n">$106,810</td></tr>
+        <tr><td>2026-01-31</td><td class="n">$10,135,710</td><td class="n">$217,918</td><td class="n">$187,606</td><td class="n">50%</td><td class="n">$93,803</td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Sign-Up Bonus -->
-    <div class="report-section">
-      <div class="report-title">Sign-Up Bonus</div>
-      <table class="sigma-table">
-        <thead>
-          <tr><th>Report Month Ending</th><th class="num"># 1st Purchase Accounts</th><th class="num"># Fraud Identified</th><th class="num"># Qualifying</th><th class="num">Rate</th><th class="num">Amount</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-09-30</td><td class="num">24</td><td class="num">3</td><td class="num">21</td><td class="num">$25.00</td><td class="num">$525.00</td></tr>
-          <tr><td>2025-10-31</td><td class="num">312</td><td class="num">11</td><td class="num">301</td><td class="num">$25.00</td><td class="num">$7,525.00</td></tr>
-          <tr><td>2025-11-30</td><td class="num">1,435</td><td class="num">42</td><td class="num">1,393</td><td class="num">$25.00</td><td class="num">$34,825.00</td></tr>
-          <tr><td>2025-12-31</td><td class="num">1,876</td><td class="num">56</td><td class="num">1,820</td><td class="num">$25.00</td><td class="num">$45,500.00</td></tr>
-          <tr><td>2026-01-31</td><td class="num">1,604</td><td class="num">49</td><td class="num">1,555</td><td class="num">$25.00</td><td class="num">$38,875.00</td></tr>
-        </tbody>
-      </table>
+    <div class="rpt-sec">
+      <div class="rpt-title">Sign-Up Bonus</div>
+      <table class="s-table"><thead><tr><th>Report Month Ending</th><th class="n"># 1st Purchase</th><th class="n"># Fraud</th><th class="n"># Qualifying</th><th class="n">Rate</th><th class="n">Amount</th></tr></thead>
+      <tbody>
+        <tr><td>2025-09-30</td><td class="n">24</td><td class="n">3</td><td class="n">21</td><td class="n">$25.00</td><td class="n">$525.00</td></tr>
+        <tr><td>2025-10-31</td><td class="n">312</td><td class="n">11</td><td class="n">301</td><td class="n">$25.00</td><td class="n">$7,525.00</td></tr>
+        <tr><td>2025-11-30</td><td class="n">1,435</td><td class="n">42</td><td class="n">1,393</td><td class="n">$25.00</td><td class="n">$34,825.00</td></tr>
+        <tr><td>2025-12-31</td><td class="n">1,876</td><td class="n">56</td><td class="n">1,820</td><td class="n">$25.00</td><td class="n">$45,500.00</td></tr>
+        <tr><td>2026-01-31</td><td class="n">1,604</td><td class="n">49</td><td class="n">1,555</td><td class="n">$25.00</td><td class="n">$38,875.00</td></tr>
+      </tbody></table>
     </div>
-
-    <!-- Account Bounty -->
-    <div class="report-section">
-      <div class="report-title">Account Bounty</div>
-      <table class="sigma-table">
-        <thead>
-          <tr><th>Report Month Ending</th><th class="num"># Qualifying Accounts</th><th class="num">Bounty Rate</th><th class="num">Account Bounty Amount</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>2025-09-30</td><td class="num">21</td><td class="num">$50.00</td><td class="num">$1,050.00</td></tr>
-          <tr><td>2025-10-31</td><td class="num">301</td><td class="num">$50.00</td><td class="num">$15,050.00</td></tr>
-          <tr><td>2025-11-30</td><td class="num">1,393</td><td class="num">$50.00</td><td class="num">$69,650.00</td></tr>
-          <tr><td>2025-12-31</td><td class="num">1,820</td><td class="num">$50.00</td><td class="num">$91,000.00</td></tr>
-          <tr><td>2026-01-31</td><td class="num">1,555</td><td class="num">$50.00</td><td class="num">$77,750.00</td></tr>
-        </tbody>
-      </table>
+    <div class="rpt-sec">
+      <div class="rpt-title">Account Bounty</div>
+      <table class="s-table"><thead><tr><th>Report Month Ending</th><th class="n"># Qualifying</th><th class="n">Bounty Rate</th><th class="n">Amount</th></tr></thead>
+      <tbody>
+        <tr><td>2025-09-30</td><td class="n">21</td><td class="n">$50.00</td><td class="n">$1,050.00</td></tr>
+        <tr><td>2025-10-31</td><td class="n">301</td><td class="n">$50.00</td><td class="n">$15,050.00</td></tr>
+        <tr><td>2025-11-30</td><td class="n">1,393</td><td class="n">$50.00</td><td class="n">$69,650.00</td></tr>
+        <tr><td>2025-12-31</td><td class="n">1,820</td><td class="n">$50.00</td><td class="n">$91,000.00</td></tr>
+        <tr><td>2026-01-31</td><td class="n">1,555</td><td class="n">$50.00</td><td class="n">$77,750.00</td></tr>
+      </tbody></table>
     </div>
   </div>
-
 </div>
 
-</div><!-- end main-content -->
+</div><!-- end page-content -->
 
-<!-- BOTTOM TABS -->
-<div class="bottom-tabs" id="bottom-tabs">
-  <div class="bottom-tab active" onclick="switchTab('applications', this)">Applications</div>
-  <div class="bottom-tab" onclick="switchTab('transaction', this)">Transaction</div>
-  <div class="bottom-tab" onclick="switchTab('portfolio', this)">Portfolio</div>
-  <div class="bottom-tab" onclick="switchTab('reporting', this)" id="reporting-tab" style="display:none;">Reporting</div>
+<!-- ===== PAGE TABS ===== -->
+<div class="page-tabs">
+  <div class="pg-tab active" onclick="goPage('applications',this)">Applications</div>
+  <div class="pg-tab" onclick="goPage('transaction',this)">Transaction</div>
+  <div class="pg-tab" onclick="goPage('portfolio',this)">Portfolio</div>
+  <div class="pg-tab" onclick="goPage('reporting',this)" id="reporting-tab" style="display:none;">Reporting</div>
 </div>
 
 <script>
-var MONTHS = ['May 31','Jun 30','Jul 31','Aug 31','Sep 30','Oct 31','Nov 30','Dec 31','Jan 31','Feb 28'];
-var COUNT = 10;
+var MO=['May 31','Jun 30','Jul 31','Aug 31','Sep 30','Oct 31','Nov 30','Dec 31','Jan 31','Feb 28'],N=10;
 
-function makeDateAxis(parentEl) {
-  var axis = document.createElement('div');
-  axis.className = 'date-axis';
-  for (var i = 0; i < COUNT; i++) {
-    var cell = document.createElement('div');
-    cell.className = 'date-axis-cell';
-    cell.textContent = MONTHS[i];
-    axis.appendChild(cell);
-  }
-  parentEl.parentNode.insertBefore(axis, parentEl.nextSibling);
+function ax(el){var a=document.createElement('div');a.className='ax';MO.forEach(function(m){var s=document.createElement('span');s.textContent=m;a.appendChild(s);});el.parentNode.insertBefore(a,el.nextSibling);}
+
+function grp(id,cols,hs){var e=document.getElementById(id);if(!e)return;for(var i=0;i<N;i++){var g=document.createElement('div');g.className='bar-grp';g.style.gap='1px';cols.forEach(function(c,ci){var b=document.createElement('div');b.className='b';var h=hs[ci]*(0.5+i*0.055);if(i>=8)h*=0.92;b.style.height=Math.round(h)+'px';b.style.background=c;b.style.width=Math.max(4,Math.floor(65/cols.length))+'%';g.appendChild(b);});e.appendChild(g);}ax(e);}
+
+function stk(id,cols,hs){var e=document.getElementById(id);if(!e)return;for(var i=0;i<N;i++){var g=document.createElement('div');g.className='bar-grp';g.style.flexDirection='column';g.style.justifyContent='flex-end';cols.forEach(function(c,ci){var b=document.createElement('div');b.className='b';var h=hs[ci]*(0.5+i*0.055);if(i>=8)h*=0.92;b.style.height=Math.round(h)+'px';b.style.background=c;b.style.width='55%';b.style.borderRadius=ci===0?'2px 2px 0 0':'0';g.appendChild(b);});e.appendChild(g);}ax(e);}
+
+// APPLICATIONS
+grp('app-combo',['#4e79a7','#74a1c8','#a0cbe8','#f0c75e'],[100,84,62,54]);
+grp('app-apr-cl',['#4e79a7'],[130]);
+stk('na-csb',['#4e79a7','#74a1c8','#a0cbe8','#898989','#d4d4d4'],[32,26,22,16,10]);
+stk('na-ch',['#74a1c8','#4e79a7','#a0cbe8','#4a9794','#69aaa4','#c290b4'],[38,28,16,11,9,8]);
+
+// TRANSACTION
+grp('txn-vol',['#4e79a7'],[140]);
+grp('txn-cnt',['#4e79a7'],[125]);
+stk('txn-pm',['#4e79a7','#74a1c8','#a0cbe8','#4a9794','#69aaa4','#d4d4d4'],[50,34,10,6,12,8]);
+stk('txn-ct',['#4e79a7','#74a1c8'],[80,48]);
+stk('txn-oo',['#4e79a7','#74a1c8'],[70,56]);
+
+// PORTFOLIO
+grp('port-growth',['#4e79a7','#74a1c8'],[140,35]);
+grp('port-act',['#4e79a7','#74a1c8'],[130,100]);
+grp('port-closed',['#4e79a7'],[55]);
+
+// PAGE NAV
+function goPage(n,el){
+  document.querySelectorAll('.tab-page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.pg-tab').forEach(function(t){t.classList.remove('active');});
+  var p=document.getElementById('pg-'+n);if(p)p.classList.add('active');
+  if(el)el.classList.add('active');
 }
 
-function genGroupedBars(id, colors, baseHeights) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  for (var i = 0; i < COUNT; i++) {
-    var col = document.createElement('div');
-    col.className = 'bar-col';
-    col.style.flexDirection = 'row';
-    col.style.alignItems = 'flex-end';
-    col.style.gap = '1px';
-    colors.forEach(function(c, ci) {
-      var bar = document.createElement('div');
-      bar.className = 'bar-seg';
-      bar.style.width = Math.max(4, Math.floor(80 / colors.length)) + '%';
-      bar.style.height = Math.round(baseHeights[ci] * (0.5 + Math.random() * 0.5)) + 'px';
-      bar.style.background = c;
-      bar.style.borderRadius = '2px 2px 0 0';
-      col.appendChild(bar);
-    });
-    el.appendChild(col);
-  }
-  makeDateAxis(el);
+// SUB TAB
+function stab(cl,g){
+  var tabs=cl.parentElement.querySelectorAll('.s-tab');
+  var idx=Array.prototype.indexOf.call(tabs,cl);
+  tabs.forEach(function(t){t.classList.remove('active');});
+  cl.classList.add('active');
+  var bods=cl.closest('.s-container').querySelectorAll('.s-tab-body[data-g="'+g+'"]');
+  bods.forEach(function(b,i){b.classList.toggle('active',i===idx);});
 }
 
-function genStackedBars(id, colors, baseHeights) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  for (var i = 0; i < COUNT; i++) {
-    var col = document.createElement('div');
-    col.className = 'bar-col';
-    colors.forEach(function(c, ci) {
-      var seg = document.createElement('div');
-      seg.className = 'bar-seg';
-      seg.style.width = '80%';
-      seg.style.height = Math.round(baseHeights[ci] * (0.5 + Math.random() * 0.5)) + 'px';
-      seg.style.background = c;
-      seg.style.borderRadius = ci === 0 ? '2px 2px 0 0' : '0';
-      col.appendChild(seg);
-    });
-    el.appendChild(col);
-  }
-}
-
-// ===================== APPLICATIONS =====================
-genGroupedBars('app-metrics-bars',
-  ['#4e79a7','#74a1c8','#a0cbe8','#4a9794'],
-  [120, 100, 75, 65]
-);
-genGroupedBars('app-apr-cl-bars',
-  ['#4e79a7'],
-  [130]
-);
-genStackedBars('app-csb-stacked',
-  ['#4e79a7','#74a1c8','#a0cbe8','#898989','#d4d4d4'],
-  [40, 34, 28, 20, 14]
-);
-genStackedBars('app-channel-stacked',
-  ['#74a1c8','#4e79a7','#a0cbe8','#4a9794','#69aaa4','#c290b4'],
-  [45, 32, 20, 14, 10, 9]
-);
-
-// ===================== TRANSACTION =====================
-genGroupedBars('txn-vol-bars', ['#4e79a7'], [140]);
-genGroupedBars('txn-settled-bars', ['#4e79a7'], [130]);
-genStackedBars('txn-method-stacked',
-  ['#4e79a7','#74a1c8','#a0cbe8','#4a9794','#69aaa4','#d4d4d4'],
-  [55, 36, 10, 7, 13, 9]
-);
-genStackedBars('txn-card-stacked', ['#4e79a7','#74a1c8'], [85, 50]);
-genStackedBars('txn-onoff-stacked', ['#4e79a7','#74a1c8'], [75, 60]);
-
-// ===================== PORTFOLIO =====================
-genGroupedBars('port-growth-bars', ['#4e79a7','#74a1c8'], [140, 40]);
-genGroupedBars('port-activity-bars', ['#4e79a7','#74a1c8'], [130, 100]);
-genGroupedBars('port-closed-bars', ['#4e79a7'], [60]);
-
-// ===================== TAB SWITCHING =====================
-function switchTab(name, el) {
-  document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelectorAll('.bottom-tab').forEach(function(t) { t.classList.remove('active'); });
-  var tabEl = document.getElementById('tab-' + name);
-  if (tabEl) tabEl.classList.add('active');
-  if (el) el.classList.add('active');
-}
-
-function switchSubTab(clicked, group) {
-  var tabs = clicked.parentElement.querySelectorAll('.sub-tab');
-  var idx = Array.prototype.indexOf.call(tabs, clicked);
-  tabs.forEach(function(t) { t.classList.remove('active'); });
-  clicked.classList.add('active');
-  var contents = clicked.closest('.sigma-container').querySelectorAll('.sub-tab-content[data-group="' + group + '"]');
-  contents.forEach(function(c, i) {
-    c.classList.toggle('active', i === idx);
-  });
-}
-
-// Show reporting tab if ?reporting=true
-var params = new URLSearchParams(window.location.search);
-if (params.get('reporting') === 'true') {
-  document.getElementById('reporting-tab').style.display = '';
-}
-
-// Handle ?tab= param
-var tabParam = params.get('tab');
-if (tabParam) {
-  document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelectorAll('.bottom-tab').forEach(function(b) { b.classList.remove('active'); });
-  var tabEl = document.getElementById('tab-' + tabParam);
-  if (tabEl) tabEl.classList.add('active');
-  document.querySelectorAll('.bottom-tab').forEach(function(b) {
-    if (b.textContent.toLowerCase().replace(/\s+/g,'') === tabParam.replace(/\s+/g,'')) b.classList.add('active');
+// URL params
+var params=new URLSearchParams(window.location.search);
+if(params.get('reporting')==='true')document.getElementById('reporting-tab').style.display='';
+var tp=params.get('tab');
+if(tp){
+  document.querySelectorAll('.tab-page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.pg-tab').forEach(function(t){t.classList.remove('active');});
+  var pe=document.getElementById('pg-'+tp);if(pe)pe.classList.add('active');
+  document.querySelectorAll('.pg-tab').forEach(function(t){
+    if(t.textContent.toLowerCase().replace(/\s+/g,'')==tp.replace(/\s+/g,''))t.classList.add('active');
   });
 }
 </script>
-
 </body>
 </html>
