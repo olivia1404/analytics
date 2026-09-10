@@ -46,6 +46,13 @@
   .section-subtitle { font-size: 10px; color: #a0aec0; font-weight: 400; margin-left: 8px; }
   .section-body { padding: 12px 16px 16px; }
 
+  /* KPI ROW (top row of KPI cards) */
+  .kpi-card-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .kpi-card { flex: 1; min-width: 140px; background: #fff; border: 1px solid #e8ecf1; border-radius: 4px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+  .kpi-card-label { font-size: 10px; color: #8895a7; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.1px; }
+  .kpi-card-value { font-size: 24px; font-weight: 700; color: #1a202c; line-height: 1; letter-spacing: -0.5px; }
+  .kpi-card-note { font-size: 9px; color: #b0b8c4; margin-top: 4px; line-height: 1.4; }
+
   /* KPI + CHART ROW */
   .kpi-chart-row { display: flex; }
   .kpi-sidebar { display: flex; flex-direction: column; min-width: 200px; max-width: 280px; border-right: 1px solid #edf2f7; }
@@ -127,6 +134,13 @@
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
   .full-width { margin-bottom: 12px; }
 
+  /* THREE COL for donut row */
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+
+  /* MAP PLACEHOLDER */
+  .map-placeholder { background: #f0f4f8; border: 1px dashed #cbd5e1; border-radius: 4px; height: 220px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; font-weight: 500; }
+  .map-placeholder svg { width: 200px; height: 140px; opacity: 0.5; }
+
   /* COLORS */
   :root {
     --c1: #4A90D9; --c2: #5BA8C8; --c3: #7EC8A0; --c4: #F5C451;
@@ -188,165 +202,203 @@
 
 <div class="main-content">
 
-<!-- ===================== ACQUISITION ===================== -->
-<div class="tab-content active" id="tab-acquisition">
+<!-- ===================== APPLICATIONS ===================== -->
+<div class="tab-content active" id="tab-applications">
 
-  <!-- Core KPIs: Submitted, Decided, Approved, Booked -->
+  <!-- Top KPI Cards Row -->
+  <div class="kpi-card-row">
+    <div class="kpi-card">
+      <div class="kpi-card-label">Submitted (#)</div>
+      <div class="kpi-card-value">18,470</div>
+      <div class="kpi-card-note"># submitted applications in period</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Underwritten (#)</div>
+      <div class="kpi-card-value">15,610</div>
+      <div class="kpi-card-note"># applications that reached underwriting</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">TTD Approval Rate (%)</div>
+      <div class="kpi-card-value">73.9%</div>
+      <div class="kpi-card-note">Approved / Underwritten</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Approved (#)</div>
+      <div class="kpi-card-value">11,530</div>
+      <div class="kpi-card-note"># applications approved (received offer)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Offer Accept Rate (%)</div>
+      <div class="kpi-card-value">92.6%</div>
+      <div class="kpi-card-note">Booked / Approved</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Booked (#)</div>
+      <div class="kpi-card-value">10,680</div>
+      <div class="kpi-card-note"># accepted credit offer (new accounts)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Conversion Rate (%)</div>
+      <div class="kpi-card-value">57.8%</div>
+      <div class="kpi-card-note">Booked / Submitted</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Avg Credit Limit ($)</div>
+      <div class="kpi-card-value">$4,250</div>
+      <div class="kpi-card-note">Mean credit limit for booked accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Avg APR (%)</div>
+      <div class="kpi-card-value">27.8%</div>
+      <div class="kpi-card-note">Mean APR for booked accounts</div>
+    </div>
+  </div>
+
+  <!-- Application Metrics combo chart -->
   <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Submitted Applications (#)</div>
-          <div class="kpi-item-value">18,470</div>
-          <div class="kpi-item-note"># submitted applications in period</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Decided Applications (#)</div>
-          <div class="kpi-item-value">15,610</div>
-          <div class="kpi-item-note"># applications in a period that have received a final decision</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Approved Applications (#)</div>
-          <div class="kpi-item-value">11,530</div>
-          <div class="kpi-item-note"># applications that were approved in period, i.e. received offer</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Through the Door Approval Rate (%)</div>
-          <div class="kpi-item-value">73.9%</div>
-          <div class="kpi-item-note">Percentage of applications that reach the underwriting step in the Application Process that receive approval.</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Booked Applications (#)</div>
-          <div class="kpi-item-value">10,680</div>
-          <div class="kpi-item-note"># accounts that accepted credit offer, i.e. new added account</div>
+    <div class="section-header"><div class="section-title">Application Metrics</div></div>
+    <div class="section-body">
+      <div class="daily-bars" id="acq-core-bars"></div>
+      <div class="chart-line-overlay" style="position:relative;height:0;top:-158px;pointer-events:none;">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" style="width:100%;height:150px;">
+          <polyline points="0,50 60,48 120,44 180,40 240,38 300,40 360,38 420,35 480,34 540,30" fill="none" stroke="var(--c5)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="legend-row" style="margin-top:8px;">
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Submitted</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Underwritten</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Approved</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Booked</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>TTD Approval Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Accounts Added bar chart -->
+  <div class="section full-width">
+    <div class="section-header"><div class="section-title">New Accounts Added</div></div>
+    <div class="section-body">
+      <div class="daily-bars" id="acq-new-accounts-bars"></div>
+      <div class="legend-row" style="margin-top:8px;">
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>New Accounts Added</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donut row: by Channel + by Credit Score Band -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Accepted (#) by Channel</div></div>
+      <div class="section-body">
+        <div style="display:flex;align-items:flex-start;gap:16px;">
+          <div class="donut-wrap">
+            <div class="donut-svg-wrap">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="42 58"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="28 72" stroke-dashoffset="-42"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="18 82" stroke-dashoffset="-70"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c7)" stroke-width="4" stroke-dasharray="12 88" stroke-dashoffset="-88"/>
+              </svg>
+              <div class="donut-center-label"><div class="val">11.5K</div><div class="lbl">Total</div></div>
+            </div>
+            <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Digital (42%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Email (28%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>In-Store (18%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c7);"></div>Other (12%)</div>
+            </div>
+          </div>
+          <div class="stacked-bar-area">
+            <div class="stacked-bar-row" id="acq-channel-stacked"></div>
+          </div>
         </div>
       </div>
-      <div class="chart-area">
-        <div class="daily-bars" id="acq-core-bars"></div>
-        <div class="chart-line-overlay">
-          <svg viewBox="0 0 600 160" preserveAspectRatio="none">
-            <polyline points="0,50 20,48 40,52 60,45 80,42 100,48 120,44 140,40 160,43 180,38 200,42 220,40 240,36 260,38 280,35 300,40 320,38 340,42 360,36 380,34 400,38 420,35 440,32 460,36 480,34 500,30 520,34 540,32 560,28 580,30 600,26" fill="none" stroke="var(--c5)" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Submitted</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Decided</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Approved</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Booked</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>TTD Approval Rate</div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">Accepted (#) by Credit Score Band</div></div>
+      <div class="section-body">
+        <div style="display:flex;align-items:flex-start;gap:16px;">
+          <div class="donut-wrap">
+            <div class="donut-svg-wrap">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="12 88"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c2)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-12"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-34"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-64"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c5)" stroke-width="4" stroke-dasharray="14 86" stroke-dashoffset="-86"/>
+              </svg>
+              <div class="donut-center-label"><div class="val">11.5K</div><div class="lbl">Total</div></div>
+            </div>
+            <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>300-579 (12%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>580-669 (22%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>670-739 (30%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>740-799 (22%)</div>
+              <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>800+ (14%)</div>
+            </div>
+          </div>
+          <div class="stacked-bar-area">
+            <div class="stacked-bar-row" id="acq-csb-stacked"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Avg Credit Limit + Avg APR -->
+  <!-- Accepted by Date and Channel stacked bar -->
   <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Average Credit Limit ($)</div>
-          <div class="kpi-item-value">$4,250</div>
-          <div class="kpi-item-note">Mean credit limit for booked accounts. I.e $ credit limit of booked accounts / booked accounts</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Average APR (%)</div>
-          <div class="kpi-item-value">27.8%</div>
-          <div class="kpi-item-note">Mean Annual Percentage Rate for booked accounts. I.e % APR of booked accounts / # booked accounts</div>
-        </div>
+    <div class="section-header"><div class="section-title">Accepted (#) by Date and Channel</div></div>
+    <div class="section-body">
+      <div class="stacked-bar-row" id="acq-date-channel-stacked" style="height:150px;"></div>
+      <div class="legend-row" style="margin-top:8px;">
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Digital</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Email</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>In-Store</div>
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c7);"></div>Other</div>
       </div>
-      <div class="chart-area">
+    </div>
+  </div>
+
+  <!-- Avg APR & Credit Limit combo (tabbed container like Sigma) -->
+  <div class="section full-width">
+    <div class="section-header"><div class="section-title">Avg APR &amp; Credit Limit</div></div>
+    <div class="sub-tabs" id="acq-apr-cl-tabs">
+      <div class="sub-tab active" onclick="switchAprClTab('combo')">Combined</div>
+      <div class="sub-tab" onclick="switchAprClTab('apr')">Avg APR (%)</div>
+      <div class="sub-tab" onclick="switchAprClTab('cl')">Avg Credit Limit ($)</div>
+    </div>
+    <div class="section-body">
+      <div id="apr-cl-combo">
         <div class="daily-bars" id="acq-apr-bars"></div>
-        <div class="chart-line-overlay">
-          <svg viewBox="0 0 600 160" preserveAspectRatio="none">
-            <polyline points="0,90 20,88 40,85 60,82 80,86 100,84 120,80 140,78 160,82 180,76 200,74 220,78 240,72 260,70 280,74 300,68 320,66 340,70 360,64 380,62 400,60 420,64 440,58 460,56 480,60 500,54 520,52 540,56 560,50 580,48 600,46" fill="none" stroke="var(--c5)" stroke-width="2"/>
+        <div class="chart-line-overlay" style="position:relative;height:0;top:-158px;pointer-events:none;">
+          <svg viewBox="0 0 600 160" preserveAspectRatio="none" style="width:100%;height:150px;">
+            <polyline points="0,90 60,85 120,80 180,76 240,72 300,68 360,64 420,58 480,56 540,50" fill="none" stroke="var(--c5)" stroke-width="2"/>
           </svg>
         </div>
         <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Average Credit Limit ($)</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>Average APR (%)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Avg Credit Limit ($)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>Avg APR (%)</div>
+        </div>
+      </div>
+      <div id="apr-cl-apr" style="display:none;">
+        <div class="daily-bars" id="acq-apr-line-bars"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>Avg APR (%)</div>
+        </div>
+      </div>
+      <div id="apr-cl-cl" style="display:none;">
+        <div class="daily-bars" id="acq-cl-line-bars"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Avg Credit Limit ($)</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Avg Credit Limit by Breakdown (NOT IN CONTRACT) -->
+  <!-- Application Funnel -->
   <div class="section full-width">
     <div class="section-header">
-      <div class="section-title">Avg Credit Limit of Booked Accounts ($) <span class="nic-badge">NOT IN CONTRACT</span></div>
-    </div>
-    <div class="sub-tabs">
-      <div class="sub-tab active">By Credit Score Band</div>
-      <div class="sub-tab">By Channel (Digital, Email, etc.)</div>
-    </div>
-    <div class="section-body">
-      <div class="breakdown-row">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="12 88"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c2)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-12"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-34"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-64"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c5)" stroke-width="4" stroke-dasharray="14 86" stroke-dashoffset="-86"/>
-            </svg>
-            <div class="donut-center-label"><div class="val">$4,250</div><div class="lbl">Avg</div></div>
-          </div>
-          <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>300-579</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>580-669</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>670-739</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>740-799</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>800+</div>
-          </div>
-        </div>
-        <div class="stacked-bar-area">
-          <div class="stacked-bar-row" id="acq-cl-stacked"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Avg APR by Breakdown (NOT IN CONTRACT) -->
-  <div class="section full-width">
-    <div class="section-header">
-      <div class="section-title">Avg APR of Booked Accounts (%) <span class="nic-badge">NOT IN CONTRACT</span></div>
-    </div>
-    <div class="sub-tabs">
-      <div class="sub-tab active">By Credit Score Band</div>
-      <div class="sub-tab">By Channel (Digital, Email, etc.)</div>
-    </div>
-    <div class="section-body">
-      <div class="breakdown-row">
-        <div class="donut-wrap">
-          <div class="donut-svg-wrap">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="12 88"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c2)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-12"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="30 70" stroke-dashoffset="-34"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="22 78" stroke-dashoffset="-64"/>
-              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c5)" stroke-width="4" stroke-dasharray="14 86" stroke-dashoffset="-86"/>
-            </svg>
-            <div class="donut-center-label"><div class="val">27.8%</div><div class="lbl">Avg</div></div>
-          </div>
-          <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>300-579</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>580-669</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>670-739</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>740-799</div>
-            <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>800+</div>
-          </div>
-        </div>
-        <div class="stacked-bar-area">
-          <div class="stacked-bar-row" id="acq-apr-stacked"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Application Funnel (NOT IN CONTRACT) -->
-  <div class="section full-width">
-    <div class="section-header">
-      <div class="section-title">Application Funnel <span class="nic-badge">NOT IN CONTRACT</span></div>
+      <div class="section-title">Application Funnel</div>
     </div>
     <div class="section-body">
       <div class="sigma-funnel">
@@ -386,199 +438,221 @@
 <!-- ===================== TRANSACTION ===================== -->
 <div class="tab-content" id="tab-transaction">
 
-  <!-- Net Settled Volume -->
-  <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Net Settled Volume ($)</div>
-          <div class="kpi-item-value">$97,415,280</div>
-          <div class="kpi-item-note">Gross Settled Volume - Settled Refunds and Disputes (REFUNDED) and Cancelled</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Net Settled Volume per PAA ($)</div>
-          <div class="kpi-item-value">$1,526</div>
-          <div class="kpi-item-note">Net Settled Volume ($) / # purchase active accounts</div>
-        </div>
-      </div>
-      <div class="chart-area">
-        <div class="daily-bars" id="txn-vol-bars"></div>
-        <div class="chart-line-overlay">
-          <svg viewBox="0 0 600 160" preserveAspectRatio="none">
-            <polyline points="0,90 20,88 40,85 60,82 80,86 100,84 120,80 140,78 160,82 180,76 200,74 220,78 240,72 260,70 280,74 300,68 320,66 340,70 360,64 380,62 400,60 420,64 440,58 460,56 480,60 500,54 520,52 540,56 560,50 580,48 600,46" fill="none" stroke="#1a202c" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Net Settled Volume ($)</div>
-          <div class="legend-chip"><div style="width:12px;height:2px;background:#1a202c;border-radius:1px;"></div>Net Settled $ per PAA</div>
-        </div>
-      </div>
+  <!-- Top KPI Cards -->
+  <div class="kpi-card-row">
+    <div class="kpi-card">
+      <div class="kpi-card-label">Net Settled Volume ($)</div>
+      <div class="kpi-card-value">$97.4M</div>
+      <div class="kpi-card-note">Gross Settled - Refunds/Disputes/Cancelled</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Settled Transactions (#)</div>
+      <div class="kpi-card-value">412,635</div>
+      <div class="kpi-card-note">Total captured transactions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Net Settled Volume per PAA ($)</div>
+      <div class="kpi-card-value">$1,526</div>
+      <div class="kpi-card-note">Net Settled Volume / # purchase active accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Avg Transaction Size ($)</div>
+      <div class="kpi-card-value">$236</div>
     </div>
   </div>
 
-  <!-- Settled Transactions -->
+  <!-- Net Settled Volume combo chart -->
   <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Settled Transactions (#)</div>
-          <div class="kpi-item-value">412,635</div>
-          <div class="kpi-item-note">Total count of captured transactions (i.e. before refunds)</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Avg Transaction Size ($)</div>
-          <div class="kpi-item-value">$236</div>
-        </div>
-      </div>
-      <div class="chart-area">
-        <div class="daily-bars" id="txn-settled-bars"></div>
-        <div class="chart-line-overlay">
-          <svg viewBox="0 0 600 160" preserveAspectRatio="none">
-            <polyline points="0,70 20,65 40,72 60,68 80,60 100,64 120,58 140,62 160,56 180,52 200,58 220,54 240,50 260,46 280,52 300,48 320,44 340,48 360,42 380,38 400,44 420,40 440,36 460,32 480,38 500,34 520,30 540,26 560,32 580,28 600,24" fill="none" stroke="#1a202c" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Settled Transactions (#)</div>
-          <div class="legend-chip"><div style="width:12px;height:2px;background:#1a202c;border-radius:1px;"></div>Avg Transaction Size ($)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Net settled volume ($) breakdown -->
-  <div class="section full-width">
-    <div class="section-header"><div class="section-title">Net settled volume ($) breakdown</div></div>
-    <div class="sub-tabs" id="txn-breakdown-tabs">
-      <div class="sub-tab active" onclick="switchBreakdownTab('method')">By purchase method</div>
-      <div class="sub-tab" onclick="switchBreakdownTab('card')">By card type</div>
-      <div class="sub-tab" onclick="switchBreakdownTab('onoff')">By on vs off-merchant</div>
-    </div>
+    <div class="section-header"><div class="section-title">Net Settled Volume ($)</div></div>
     <div class="section-body">
-      <div id="breakdown-method">
-        <div class="breakdown-row">
-          <div class="donut-wrap">
-            <div class="donut-svg-wrap">
-              <svg viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="8 92"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c2)" stroke-width="4" stroke-dasharray="28 72" stroke-dashoffset="-8"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="5 95" stroke-dashoffset="-36"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="42 58" stroke-dashoffset="-41"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c5)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-83"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c8)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
-              </svg>
-              <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-            </div>
-            <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Chip (8%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Contactless (28%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Keyentry (5%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Online (42%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>Swipe (10%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c8);"></div>Unknown (7%)</div>
-            </div>
+      <div class="daily-bars" id="txn-vol-bars"></div>
+      <div class="chart-line-overlay" style="position:relative;height:0;top:-158px;pointer-events:none;">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" style="width:100%;height:150px;">
+          <polyline points="0,90 60,85 120,80 180,76 240,72 300,68 360,64 420,58 480,56 540,50" fill="none" stroke="#1a202c" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="legend-row" style="margin-top:8px;">
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Net Settled Volume ($)</div>
+        <div class="legend-chip"><div style="width:12px;height:2px;background:#1a202c;border-radius:1px;"></div>Net Settled $ per PAA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settled Transactions combo chart -->
+  <div class="section full-width">
+    <div class="section-header"><div class="section-title">Settled Transactions (#)</div></div>
+    <div class="section-body">
+      <div class="daily-bars" id="txn-settled-bars"></div>
+      <div class="chart-line-overlay" style="position:relative;height:0;top:-158px;pointer-events:none;">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" style="width:100%;height:150px;">
+          <polyline points="0,70 60,65 120,58 180,52 240,50 300,48 360,42 420,38 480,34 540,30" fill="none" stroke="#1a202c" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="legend-row" style="margin-top:8px;">
+        <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Settled Transactions (#)</div>
+        <div class="legend-chip"><div style="width:12px;height:2px;background:#1a202c;border-radius:1px;"></div>Avg Transaction Size ($)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Geographic Map -->
+  <div class="section full-width">
+    <div class="section-header"><div class="section-title">Net Settled Volume ($) by Region</div></div>
+    <div class="section-body">
+      <div class="map-placeholder">
+        <svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
+          <path d="M230,120 L280,100 L350,110 L400,95 L430,100 L480,90 L520,100 L550,95 L590,100 L620,110 L650,100 L700,120 L750,105 L780,115 L800,140 L810,170 L790,200 L800,230 L810,260 L800,290 L780,310 L790,340 L780,370 L760,390 L730,380 L700,390 L670,380 L650,400 L620,390 L590,400 L560,390 L530,400 L500,390 L470,400 L440,390 L410,380 L380,390 L350,380 L320,400 L290,390 L260,400 L230,390 L200,380 L180,350 L160,320 L170,290 L160,260 L170,230 L180,200 L170,170 L190,150 Z" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+          <circle cx="320" cy="200" r="18" fill="var(--c1)" opacity="0.6"/>
+          <circle cx="700" cy="190" r="14" fill="var(--c1)" opacity="0.5"/>
+          <circle cx="550" cy="300" r="22" fill="var(--c1)" opacity="0.7"/>
+          <circle cx="400" cy="350" r="12" fill="var(--c1)" opacity="0.4"/>
+          <circle cx="260" cy="350" r="16" fill="var(--c1)" opacity="0.55"/>
+          <circle cx="480" cy="180" r="10" fill="var(--c1)" opacity="0.35"/>
+          <circle cx="620" cy="280" r="15" fill="var(--c1)" opacity="0.5"/>
+          <text x="480" y="460" text-anchor="middle" font-size="14" fill="#94a3b8" font-family="Inter, sans-serif">Geographic Distribution</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donut row: by Purchase Method + by On/Off Merchant + by Card Type -->
+  <div class="three-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">By Purchase Method</div></div>
+      <div class="section-body">
+        <div class="donut-wrap" style="width:100%;">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="8 92"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c2)" stroke-width="4" stroke-dasharray="28 72" stroke-dashoffset="-8"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c3)" stroke-width="4" stroke-dasharray="5 95" stroke-dashoffset="-36"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="42 58" stroke-dashoffset="-41"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c5)" stroke-width="4" stroke-dasharray="10 90" stroke-dashoffset="-83"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c8)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="-93"/>
+            </svg>
+            <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
           </div>
-          <div class="stacked-bar-area">
-            <div class="stacked-bar-row" id="txn-method-stacked"></div>
+          <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Chip (8%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Contactless (28%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Keyentry (5%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Online (42%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c5);"></div>Swipe (10%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c8);"></div>Unknown (7%)</div>
           </div>
         </div>
       </div>
-      <div id="breakdown-card" style="display:none;">
-        <div class="breakdown-row">
-          <div class="donut-wrap">
-            <div class="donut-svg-wrap">
-              <svg viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="63 37"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="37 63" stroke-dashoffset="-63"/>
-              </svg>
-              <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-            </div>
-            <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Visa Classic (63%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Visa Signature (37%)</div>
-            </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">By On/Off Merchant</div></div>
+      <div class="section-body">
+        <div class="donut-wrap" style="width:100%;">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="55 45"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="45 55" stroke-dashoffset="-55"/>
+            </svg>
+            <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
           </div>
-          <div class="stacked-bar-area">
-            <div class="stacked-bar-row" id="txn-card-stacked"></div>
+          <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>On-Merchant (55%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Off-Merchant (45%)</div>
           </div>
         </div>
       </div>
-      <div id="breakdown-onoff" style="display:none;">
-        <div class="breakdown-row">
-          <div class="donut-wrap">
-            <div class="donut-svg-wrap">
-              <svg viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="55 45"/>
-                <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="45 55" stroke-dashoffset="-55"/>
-              </svg>
-              <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
-            </div>
-            <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>On-Merchant / PMI (55%)</div>
-              <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Off-Merchant / Non-PMI (45%)</div>
-            </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">By Card Type</div></div>
+      <div class="section-body">
+        <div class="donut-wrap" style="width:100%;">
+          <div class="donut-svg-wrap">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c1)" stroke-width="4" stroke-dasharray="63 37"/>
+              <circle cx="18" cy="18" r="14" fill="none" stroke="var(--c4)" stroke-width="4" stroke-dasharray="37 63" stroke-dashoffset="-63"/>
+            </svg>
+            <div class="donut-center-label"><div class="val">$97.4M</div><div class="lbl">Total</div></div>
           </div>
-          <div class="stacked-bar-area">
-            <div class="stacked-bar-row" id="txn-onoff-stacked"></div>
+          <div class="legend-row" style="margin-top:10px;flex-direction:column;gap:4px;">
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Visa Classic (63%)</div>
+            <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Visa Signature (37%)</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Off-merchant spend -->
-  <div class="section full-width">
-    <div class="section-header"><div class="section-title">Off-merchant spend</div></div>
-    <div class="sub-tabs">
-      <div class="sub-tab active">Top merchants</div>
-      <div class="sub-tab">Top categories</div>
-      <div class="sub-tab">Top states</div>
-    </div>
-    <div class="section-body">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-        <span style="font-size:10px;color:#6b7280;font-weight:600;">Top N</span>
-        <select class="filter-select" style="min-width:60px;">
-          <option selected>25</option>
-          <option>10</option>
-          <option>50</option>
-        </select>
-        <span style="font-size:10px;color:#a0aec0;">by net settled volume ($)</span>
-      </div>
-      <div style="display:flex;gap:16px;">
-        <div style="flex:1;overflow-x:auto;">
-          <table class="sigma-table">
-            <thead>
-              <tr><th>Purchase Merchant Name</th><th class="num">Net Settled Volume ($)</th><th class="num">Settled Transactions (#)</th><th class="num">Accounts (#)</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>WALMART</td><td class="num">$9,724,350</td><td class="num">38,260</td><td class="num">22,180</td></tr>
-              <tr><td>AMAZON.COM</td><td class="num">$8,951,670</td><td class="num">41,310</td><td class="num">24,270</td></tr>
-              <tr><td>COSTCO WHOLESALE</td><td class="num">$6,012,480</td><td class="num">18,830</td><td class="num">12,390</td></tr>
-              <tr><td>TARGET</td><td class="num">$5,718,940</td><td class="num">23,360</td><td class="num">14,010</td></tr>
-              <tr><td>ALDI</td><td class="num">$4,247,610</td><td class="num">22,110</td><td class="num">13,330</td></tr>
-              <tr><td>HOME DEPOT</td><td class="num">$3,951,230</td><td class="num">10,370</td><td class="num">7,010</td></tr>
-              <tr><td>WALGREENS</td><td class="num">$2,528,390</td><td class="num">13,770</td><td class="num">9,600</td></tr>
-              <tr><td>BESTBUY.COM</td><td class="num">$2,375,140</td><td class="num">6,860</td><td class="num">5,090</td></tr>
-              <tr><td>CVS PHARMACY</td><td class="num">$2,287,610</td><td class="num">12,510</td><td class="num">8,410</td></tr>
-              <tr><td>MCDONALD'S</td><td class="num">$2,187,740</td><td class="num">16,590</td><td class="num">10,670</td></tr>
-              <tr><td>LOWES</td><td class="num">$2,118,530</td><td class="num">6,600</td><td class="num">4,710</td></tr>
-              <tr><td>PUBLIX</td><td class="num">$1,951,640</td><td class="num">10,190</td><td class="num">6,870</td></tr>
-              <tr><td>UBER EATS</td><td class="num">$1,864,270</td><td class="num">8,530</td><td class="num">6,400</td></tr>
-              <tr><td>STARBUCKS</td><td class="num">$1,779,310</td><td class="num">14,340</td><td class="num">9,380</td></tr>
-              <tr><td>CHEVRON</td><td class="num">$1,668,590</td><td class="num">9,920</td><td class="num">6,250</td></tr>
-              <tr><td>DOORDASH</td><td class="num">$1,460,720</td><td class="num">7,500</td><td class="num">5,670</td></tr>
-              <tr><td>AUTOZONE</td><td class="num">$1,296,910</td><td class="num">4,260</td><td class="num">2,750</td></tr>
-              <tr><td>OREILLY AUTO PARTS</td><td class="num">$1,127,340</td><td class="num">4,070</td><td class="num">2,560</td></tr>
-              <tr><td>EXXONMOBIL</td><td class="num">$972,860</td><td class="num">5,980</td><td class="num">4,190</td></tr>
-              <tr><td>TACO BELL</td><td class="num">$913,470</td><td class="num">7,750</td><td class="num">4,700</td></tr>
-              <tr><td>WENDY'S</td><td class="num">$768,720</td><td class="num">6,080</td><td class="num">4,310</td></tr>
-              <tr><td>CHICK-FIL-A</td><td class="num">$626,130</td><td class="num">4,660</td><td class="num">2,950</td></tr>
-              <tr><td>ADVANCE AUTO PARTS</td><td class="num">$484,270</td><td class="num">2,420</td><td class="num">1,570</td></tr>
-              <tr><td>SAM'S CLUB</td><td class="num">$447,640</td><td class="num">2,130</td><td class="num">1,400</td></tr>
-              <tr><td>TRADER JOE'S</td><td class="num">$361,520</td><td class="num">2,900</td><td class="num">2,060</td></tr>
-            </tbody>
-          </table>
-          <div style="font-size:10px;color:#a0aec0;margin-top:6px;">SUMMARY: 25 of 873 rows | 4 columns</div>
+  <!-- Stacked bar breakdowns: by Date and On/Off + by Date and Card Type -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Net Settled Volume ($) by Date and On/Off Merchant</div></div>
+      <div class="section-body">
+        <div class="stacked-bar-row" id="txn-onoff-stacked" style="height:130px;"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>On-Merchant</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Off-Merchant</div>
         </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">Net Settled Volume ($) by Date and Card Type</div></div>
+      <div class="section-body">
+        <div class="stacked-bar-row" id="txn-card-stacked" style="height:130px;"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Visa Classic</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Visa Signature</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Categories table -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Top Categories</div></div>
+      <div class="section-body">
+        <table class="sigma-table">
+          <thead>
+            <tr><th>Category</th><th class="num">Net Settled Volume ($)</th><th class="num">Txns (#)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Grocery / Supermarket</td><td class="num">$14,612,290</td><td class="num">72,840</td></tr>
+            <tr><td>General Merchandise</td><td class="num">$12,361,510</td><td class="num">48,320</td></tr>
+            <tr><td>Restaurants / Fast Food</td><td class="num">$9,741,530</td><td class="num">62,110</td></tr>
+            <tr><td>Gas / Fuel</td><td class="num">$7,793,220</td><td class="num">38,950</td></tr>
+            <tr><td>Home Improvement</td><td class="num">$6,069,710</td><td class="num">16,970</td></tr>
+            <tr><td>Health / Pharmacy</td><td class="num">$4,815,940</td><td class="num">26,280</td></tr>
+            <tr><td>Online Retail</td><td class="num">$4,593,170</td><td class="num">21,540</td></tr>
+            <tr><td>Auto Parts / Service</td><td class="num">$3,423,050</td><td class="num">10,750</td></tr>
+            <tr><td>Entertainment</td><td class="num">$2,438,820</td><td class="num">14,610</td></tr>
+            <tr><td>Travel / Lodging</td><td class="num">$1,949,470</td><td class="num">5,840</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:10px;color:#a0aec0;margin-top:6px;">SUMMARY: 10 of 142 rows | 3 columns</div>
+      </div>
+    </div>
+
+    <!-- Top Merchants table -->
+    <div class="section">
+      <div class="section-header"><div class="section-title">Top Merchants</div></div>
+      <div class="section-body">
+        <table class="sigma-table">
+          <thead>
+            <tr><th>Merchant Name</th><th class="num">Net Settled Volume ($)</th><th class="num">Txns (#)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>WALMART</td><td class="num">$9,724,350</td><td class="num">38,260</td></tr>
+            <tr><td>AMAZON.COM</td><td class="num">$8,951,670</td><td class="num">41,310</td></tr>
+            <tr><td>COSTCO WHOLESALE</td><td class="num">$6,012,480</td><td class="num">18,830</td></tr>
+            <tr><td>TARGET</td><td class="num">$5,718,940</td><td class="num">23,360</td></tr>
+            <tr><td>ALDI</td><td class="num">$4,247,610</td><td class="num">22,110</td></tr>
+            <tr><td>HOME DEPOT</td><td class="num">$3,951,230</td><td class="num">10,370</td></tr>
+            <tr><td>WALGREENS</td><td class="num">$2,528,390</td><td class="num">13,770</td></tr>
+            <tr><td>BESTBUY.COM</td><td class="num">$2,375,140</td><td class="num">6,860</td></tr>
+            <tr><td>CVS PHARMACY</td><td class="num">$2,287,610</td><td class="num">12,510</td></tr>
+            <tr><td>MCDONALD'S</td><td class="num">$2,187,740</td><td class="num">16,590</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:10px;color:#a0aec0;margin-top:6px;">SUMMARY: 10 of 873 rows | 3 columns</div>
       </div>
     </div>
   </div>
@@ -589,51 +663,108 @@
 <!-- ===================== PORTFOLIO ===================== -->
 <div class="tab-content" id="tab-portfolio">
 
-  <!-- Purchase Active + Balance Active -->
-  <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Purchase Active Accounts (#)</div>
-          <div class="kpi-item-value">63,810</div>
-          <div class="kpi-item-note">Open accounts with at least one captured txn in last 30 days</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Balance Active Accounts (#)</div>
-          <div class="kpi-item-value">41,520</div>
-          <div class="kpi-item-note">Accounts that are balance active in the period</div>
-        </div>
-      </div>
-      <div class="chart-area">
+  <!-- Top KPI Cards -->
+  <div class="kpi-card-row">
+    <div class="kpi-card">
+      <div class="kpi-card-label">Gross Booked Accounts (#)</div>
+      <div class="kpi-card-value">82,470</div>
+      <div class="kpi-card-note">Total accounts ever booked</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Open Accounts (#)</div>
+      <div class="kpi-card-value">78,930</div>
+      <div class="kpi-card-note">Currently open accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">New Added Accounts (#)</div>
+      <div class="kpi-card-value">10,680</div>
+      <div class="kpi-card-note">New accounts added in period</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Purchase Active Accounts (#)</div>
+      <div class="kpi-card-value">63,810</div>
+      <div class="kpi-card-note">Open accounts with 1+ txn in last 30 days</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Purchase Active Rate (%)</div>
+      <div class="kpi-card-value">80.8%</div>
+      <div class="kpi-card-note">Purchase Active / Open Accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Ever Purchase Active Accounts (#)</div>
+      <div class="kpi-card-value">71,240</div>
+      <div class="kpi-card-note">Accounts with at least 1 purchase ever</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Ever Purchase Active Rate (%)</div>
+      <div class="kpi-card-value">90.2%</div>
+      <div class="kpi-card-note">Ever Purchase Active / Open Accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Balance Active Accounts (#)</div>
+      <div class="kpi-card-value">41,520</div>
+      <div class="kpi-card-note">Accounts that are balance active</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Balance Active Rate (%)</div>
+      <div class="kpi-card-value">52.6%</div>
+      <div class="kpi-card-note">Balance Active / Open Accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Closed Accounts (#)</div>
+      <div class="kpi-card-value">1,870</div>
+      <div class="kpi-card-note">Accounts closed in period</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Voluntary Closure Rate (%)</div>
+      <div class="kpi-card-value">70.1%</div>
+      <div class="kpi-card-note">Voluntary closed / Total closed</div>
+    </div>
+  </div>
+
+  <!-- Application Metrics (account trends) combo chart -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Active Accounts Over Time</div></div>
+      <div class="section-body">
         <div class="daily-bars" id="port-active-bars"></div>
         <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Purchase Active Accounts (#)</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Balance Active Accounts (#)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Purchase Active (#)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c2);"></div>Balance Active (#)</div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">Closed Accounts Over Time</div></div>
+      <div class="section-body">
+        <div class="daily-bars" id="port-closed-bars"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c6);"></div>Closed (#)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Voluntary Closed (#)</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Closed + Voluntary Closed -->
-  <div class="section full-width">
-    <div class="kpi-chart-row">
-      <div class="kpi-sidebar">
-        <div class="kpi-item">
-          <div class="kpi-item-label">Closed Accounts (#)</div>
-          <div class="kpi-item-value">1,870</div>
-          <div class="kpi-item-note">Count of closed accounts in the period</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-item-label">Voluntary Closed Accounts (#)</div>
-          <div class="kpi-item-value">1,310</div>
-          <div class="kpi-item-note">Count of voluntary closed accounts in the period</div>
+  <!-- Open vs Booked combo chart -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Open Accounts &amp; New Added</div></div>
+      <div class="section-body">
+        <div class="daily-bars" id="port-open-bars"></div>
+        <div class="legend-row" style="margin-top:8px;">
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c3);"></div>Open Accounts (#)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>New Added (#)</div>
         </div>
       </div>
-      <div class="chart-area">
-        <div class="daily-bars" id="port-closed-bars"></div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">Activation Rates Over Time</div></div>
+      <div class="section-body">
+        <div class="daily-bars" id="port-rates-bars"></div>
         <div class="legend-row" style="margin-top:8px;">
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c6);"></div>Closed Accounts (#)</div>
-          <div class="legend-chip"><div class="legend-color" style="background:var(--c4);"></div>Voluntary Closed Accounts (#)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c1);"></div>Purchase Active Rate (%)</div>
+          <div class="legend-chip"><div class="legend-color" style="background:var(--c7);"></div>Ever Purchase Active Rate (%)</div>
         </div>
       </div>
     </div>
@@ -642,18 +773,17 @@
   <div style="font-size:11px;color:#a0aec0;padding:0 4px;">Date: Activity Date (EST)</div>
 </div>
 
-<!-- ===================== REPORTING (hidden by default) ===================== -->
+<!-- ===================== REPORTING ===================== -->
 <div class="tab-content" id="tab-reporting">
 
   <!-- New Account Fee -->
   <div class="section full-width">
     <div class="section-header"><div class="section-title">New Account Fee</div></div>
     <div class="section-body">
-      <div style="font-size:12px;font-weight:600;color:#1a202c;margin-bottom:4px;">New Account Fee (by month)</div>
       <div style="font-size:10px;color:#a0aec0;margin-bottom:8px;">Per-account fee multiplied by total number of new Cardholders (non-fraud) that make first purchase + per-account fee multiplied by total Qualifying Accounts (per contract terms)</div>
       <table class="sigma-table">
         <thead>
-          <tr><th>Month Ending</th><th class="num"># of accounts making their first purchase (non-fraud)</th><th class="num"># of fraudulent accounts identified who made a 1st purchase in a prior month</th><th class="num"># of qualifying accounts</th><th class="num">Rate</th><th class="num">Amount</th></tr>
+          <tr><th>Month Ending</th><th class="num"># 1st Purchase (non-fraud)</th><th class="num"># Fraud Identified</th><th class="num"># Qualifying</th><th class="num">Rate</th><th class="num">Amount</th></tr>
         </thead>
         <tbody>
           <tr><td>2025-07-31</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">$25.00</td><td class="num">$0.00</td></tr>
@@ -673,7 +803,6 @@
   <div class="section full-width">
     <div class="section-header"><div class="section-title">Recurring Payments</div></div>
     <div class="section-body">
-      <div style="font-size:12px;font-weight:600;color:#1a202c;margin-bottom:4px;">Recurring Payments (by month)</div>
       <div style="font-size:10px;color:#a0aec0;margin-bottom:8px;">Basis points of Net Purchases in such month (per contract terms)</div>
       <table class="sigma-table">
         <thead>
@@ -781,20 +910,17 @@
 
 </div>
 
-
-
 </div><!-- end main-content -->
 
 <!-- BOTTOM TABS -->
 <div class="bottom-tabs" id="bottom-tabs">
-  <div class="bottom-tab active" onclick="switchTab('acquisition')">Acquisition</div>
+  <div class="bottom-tab active" onclick="switchTab('applications')">Applications</div>
   <div class="bottom-tab" onclick="switchTab('transaction')">Transaction</div>
   <div class="bottom-tab" onclick="switchTab('portfolio')">Portfolio</div>
   <div class="bottom-tab" onclick="switchTab('reporting')" id="reporting-tab" style="display:none;">Reporting</div>
 </div>
 
 <script>
-// Date axis helper: generates month-end labels starting from May 2026
 var MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function lastDayOfMonth(year, month) {
@@ -802,7 +928,7 @@ function lastDayOfMonth(year, month) {
 }
 
 function formatMonthEndLabel(monthIndex) {
-  var startMonth = 4; // May (0-indexed)
+  var startMonth = 4;
   var startYear = 2026;
   var m = startMonth + monthIndex;
   var y = startYear + Math.floor(m / 12);
@@ -855,6 +981,7 @@ function genBars(id, colors, heights, count) {
   }
   addDateAxis(el, count, 'date-axis');
 }
+
 function genStacked(id, colors, heights, count) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -890,17 +1017,15 @@ function addChartTable(barId, labels, data) {
   var wrapper = document.createElement('div');
   wrapper.innerHTML = html;
   var tbl = wrapper.firstChild;
-  var chartArea = barEl.closest('.chart-area');
-  if (chartArea) { chartArea.appendChild(tbl); return; }
-  var breakdownRow = barEl.closest('.breakdown-row');
-  if (breakdownRow) { breakdownRow.parentNode.appendChild(tbl); return; }
+  var sectionBody = barEl.closest('.section-body');
+  if (sectionBody) { sectionBody.appendChild(tbl); return; }
   barEl.parentNode.appendChild(tbl);
 }
 
-// ===================== ACQUISITION =====================
+// ===================== APPLICATIONS =====================
 genBars('acq-core-bars', ['#4A90D9','#5BA8C8','#7EC8A0','#F5C451'], [50,42,30,25], 10);
 addChartTable('acq-core-bars',
-  ['Submitted Applications (#)', 'Decided Applications (#)', 'Approved Applications (#)', 'Booked Applications (#)'],
+  ['Submitted (#)', 'Underwritten (#)', 'Approved (#)', 'Booked (#)'],
   [
     ['1,040','1,310','1,560','1,780','1,910','2,050','2,190','2,340','2,170','2,120'],
     ['870','1,100','1,310','1,500','1,610','1,720','1,840','1,970','1,830','1,780'],
@@ -909,57 +1034,27 @@ addChartTable('acq-core-bars',
   ]
 );
 
+genBars('acq-new-accounts-bars', ['#4A90D9'], [60], 10);
+addChartTable('acq-new-accounts-bars',
+  ['New Accounts Added'],
+  [['590','750','890','1,020','1,090','1,170','1,250','1,330','1,240','1,210']]
+);
+
+genStacked('acq-channel-stacked', ['#4A90D9','#7EC8A0','#F5C451','#9B6FD4'], [42,28,18,12], 10);
+genStacked('acq-csb-stacked', ['#4A90D9','#5BA8C8','#7EC8A0','#F5C451','#E8845C'], [12,22,30,22,14], 10);
+genStacked('acq-date-channel-stacked', ['#4A90D9','#7EC8A0','#F5C451','#9B6FD4'], [50,35,22,15], 10);
+
 genBars('acq-apr-bars', ['#4A90D9'], [80], 10);
 addChartTable('acq-apr-bars',
-  ['Average Credit Limit ($)', 'Average APR (%)'],
+  ['Avg Credit Limit ($)', 'Avg APR (%)'],
   [
     ['$3,710','$3,820','$3,940','$4,050','$4,120','$4,180','$4,240','$4,310','$4,270','$4,250'],
     ['29.4%','29.1%','28.7%','28.4%','28.2%','28.0%','27.8%','27.6%','27.7%','27.8%']
   ]
 );
 
-genStacked('acq-cl-stacked', ['#4A90D9','#5BA8C8','#7EC8A0','#F5C451','#E8845C'], [15,25,35,25,15], 10);
-addChartTable('acq-cl-stacked',
-  ['300-579','580-669','670-739','740-799','800+'],
-  [
-    ['$2,010','$1,980','$1,950','$1,970','$1,940','$1,910','$1,890','$1,870','$1,900','$1,880'],
-    ['$2,720','$2,750','$2,790','$2,810','$2,840','$2,860','$2,890','$2,910','$2,880','$2,900'],
-    ['$4,150','$4,200','$4,260','$4,310','$4,350','$4,390','$4,430','$4,470','$4,420','$4,450'],
-    ['$5,680','$5,770','$5,850','$5,920','$5,990','$6,050','$6,110','$6,170','$6,120','$6,150'],
-    ['$8,210','$8,340','$8,470','$8,570','$8,660','$8,740','$8,820','$8,900','$8,830','$8,860']
-  ]
-);
-
-genStacked('acq-apr-stacked', ['#4A90D9','#5BA8C8','#7EC8A0','#F5C451','#E8845C'], [30,25,20,15,10], 10);
-addChartTable('acq-apr-stacked',
-  ['300-579','580-669','670-739','740-799','800+'],
-  [
-    ['34.8%','34.7%','34.5%','34.4%','34.3%','34.2%','34.1%','34.0%','34.1%','34.0%'],
-    ['32.6%','32.5%','32.3%','32.2%','32.1%','32.0%','31.9%','31.8%','31.9%','31.8%'],
-    ['28.9%','28.7%','28.5%','28.4%','28.2%','28.1%','27.9%','27.8%','27.9%','27.8%'],
-    ['25.7%','25.5%','25.3%','25.2%','25.0%','24.9%','24.7%','24.6%','24.7%','24.6%'],
-    ['23.4%','23.3%','23.2%','23.1%','23.0%','22.9%','22.8%','22.7%','22.8%','22.7%']
-  ]
-);
-
-// ===================== PORTFOLIO =====================
-genBars('port-active-bars', ['#4A90D9','#5BA8C8'], [60,40], 10);
-addChartTable('port-active-bars',
-  ['Purchase Active Accounts (#)', 'Balance Active Accounts (#)'],
-  [
-    ['45,300','47,850','50,700','53,410','55,920','58,150','60,340','62,580','63,100','63,810'],
-    ['27,640','30,180','32,890','35,420','37,150','38,710','40,020','41,380','41,100','41,520']
-  ]
-);
-
-genBars('port-closed-bars', ['#D45B5B','#F5C451'], [15,10], 10);
-addChartTable('port-closed-bars',
-  ['Closed Accounts (#)', 'Voluntary Closed Accounts (#)'],
-  [
-    ['105','130','148','170','188','205','218','230','210','206'],
-    ['74','92','104','120','132','144','152','161','147','145']
-  ]
-);
+genBars('acq-apr-line-bars', ['#E8845C'], [50], 10);
+genBars('acq-cl-line-bars', ['#4A90D9'], [80], 10);
 
 // ===================== TRANSACTION =====================
 genBars('txn-vol-bars', ['#4A90D9'], [100], 10);
@@ -980,49 +1075,60 @@ addChartTable('txn-settled-bars',
   ]
 );
 
-genStacked('txn-method-stacked', ['#4A90D9','#5BA8C8','#7EC8A0','#F5C451','#E8845C','#A0AEC0'], [8,28,5,42,10,7], 10);
-addChartTable('txn-method-stacked',
-  ['Chip','Contactless','Keyentry','Online','Swipe','Unknown'],
-  [
-    ['$512K','$600K','$704K','$808K','$856K','$880K','$928K','$984K','$912K','$888K'],
-    ['$1.79M','$2.10M','$2.46M','$2.83M','$3.00M','$3.08M','$3.25M','$3.44M','$3.19M','$3.11M'],
-    ['$320K','$375K','$440K','$505K','$535K','$550K','$580K','$615K','$570K','$555K'],
-    ['$2.69M','$3.15M','$3.70M','$4.24M','$4.49M','$4.62M','$4.87M','$5.17M','$4.79M','$4.66M'],
-    ['$640K','$750K','$880K','$1.01M','$1.07M','$1.10M','$1.16M','$1.23M','$1.14M','$1.11M'],
-    ['$448K','$525K','$616K','$707K','$749K','$770K','$812K','$861K','$798K','$777K']
-  ]
-);
-
-genStacked('txn-card-stacked', ['#4A90D9','#F5C451'], [63,37], 10);
-addChartTable('txn-card-stacked',
-  ['Visa Classic','Visa Signature'],
-  [
-    ['$4.03M','$4.73M','$5.54M','$6.36M','$6.74M','$6.93M','$7.31M','$7.75M','$7.18M','$6.99M'],
-    ['$2.37M','$2.77M','$3.26M','$3.74M','$3.96M','$4.07M','$4.29M','$4.55M','$4.22M','$4.11M']
-  ]
-);
-
 genStacked('txn-onoff-stacked', ['#4A90D9','#F5C451'], [55,45], 10);
-addChartTable('txn-onoff-stacked',
-  ['On-Merchant / PMI','Off-Merchant / Non-PMI'],
+genStacked('txn-card-stacked', ['#4A90D9','#F5C451'], [63,37], 10);
+
+// ===================== PORTFOLIO =====================
+genBars('port-active-bars', ['#4A90D9','#5BA8C8'], [60,40], 10);
+addChartTable('port-active-bars',
+  ['Purchase Active (#)', 'Balance Active (#)'],
   [
-    ['$3.52M','$4.13M','$4.84M','$5.56M','$5.89M','$6.05M','$6.38M','$6.77M','$6.27M','$6.11M'],
-    ['$2.88M','$3.37M','$3.96M','$4.54M','$4.81M','$4.95M','$5.22M','$5.53M','$5.13M','$4.99M']
+    ['45,300','47,850','50,700','53,410','55,920','58,150','60,340','62,580','63,100','63,810'],
+    ['27,640','30,180','32,890','35,420','37,150','38,710','40,020','41,380','41,100','41,520']
   ]
 );
 
-function switchBreakdownTab(view) {
-  ['method','card','onoff'].forEach(v => {
-    document.getElementById('breakdown-' + v).style.display = v === view ? 'block' : 'none';
-  });
-  document.querySelectorAll('#txn-breakdown-tabs .sub-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-}
+genBars('port-closed-bars', ['#D45B5B','#F5C451'], [15,10], 10);
+addChartTable('port-closed-bars',
+  ['Closed (#)', 'Voluntary Closed (#)'],
+  [
+    ['105','130','148','170','188','205','218','230','210','206'],
+    ['74','92','104','120','132','144','152','161','147','145']
+  ]
+);
 
+genBars('port-open-bars', ['#7EC8A0','#F5C451'], [80,25], 10);
+addChartTable('port-open-bars',
+  ['Open Accounts (#)', 'New Added (#)'],
+  [
+    ['68,250','70,100','71,800','73,400','74,900','76,200','77,400','78,500','78,700','78,930'],
+    ['590','750','890','1,020','1,090','1,170','1,250','1,330','1,240','1,210']
+  ]
+);
+
+genBars('port-rates-bars', ['#4A90D9','#9B6FD4'], [70,80], 10);
+addChartTable('port-rates-bars',
+  ['Purchase Active Rate (%)', 'Ever Purchase Active Rate (%)'],
+  [
+    ['76.2%','77.1%','78.0%','78.8%','79.5%','80.0%','80.3%','80.6%','80.7%','80.8%'],
+    ['86.4%','87.1%','87.8%','88.4%','88.9%','89.3%','89.6%','89.9%','90.0%','90.2%']
+  ]
+);
+
+// ===================== TAB SWITCHING =====================
 function switchTab(name) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.bottom-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function switchAprClTab(view) {
+  ['combo','apr','cl'].forEach(v => {
+    var el = document.getElementById('apr-cl-' + v);
+    if (el) el.style.display = v === view ? 'block' : 'none';
+  });
+  document.querySelectorAll('#acq-apr-cl-tabs .sub-tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
 }
 
@@ -1041,7 +1147,7 @@ if (tabParam) {
     var tabEl = document.getElementById('tab-' + tabParam);
     if (tabEl) tabEl.classList.add('active');
     document.querySelectorAll('.bottom-tab').forEach(b => {
-      if (b.textContent.toLowerCase().replace(/\s+/g,'-') === tabParam) b.classList.add('active');
+      if (b.textContent.toLowerCase().replace(/\s+/g,'') === tabParam.replace(/\s+/g,'')) b.classList.add('active');
     });
   });
 }
