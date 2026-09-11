@@ -671,51 +671,71 @@
     <div class="s-heading">Portfolio Growth</div>
     <div class="kpi-chart">
       <div class="kpi-side">
-        <div class="kpi-cell"><div class="kpi-name">Gross Booked Accounts (#)</div><div class="kpi-val">82,470</div><div class="kpi-sub">of gross booked</div></div>
-        <div class="kpi-cell"><div class="kpi-name">New Added Accounts (#)</div><div class="kpi-val">10,680</div><div class="kpi-sub">by month</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Accounts (#)</div><div class="kpi-val">71,240</div><div class="kpi-sub">by month</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Rate (%)</div><div class="kpi-val">90.2%</div><div class="kpi-sub">by month</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Gross Booked Accounts (#)</div><div class="kpi-val">56</div></div>
+        <div class="kpi-cell"><div class="kpi-name">New Added Accounts (#)</div><div class="kpi-val">56</div></div>
       </div>
       <div class="chart-pane">
         <div class="chart-wrap">
           <div class="bars" id="port-growth"></div>
           <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
-            <polyline points="50,60 150,55 250,50 350,46 450,42 550,38 650,35 750,32 850,31 950,30" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="50,10 150,10 250,30 350,35 450,25 550,20 650,15 750,18 850,12 950,10" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
           </svg></div>
         </div>
         <div class="ax" id="port-growth-ax"></div>
         <div class="leg">
-          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Gross Booked</div>
-          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>New Added</div>
-          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Ever Purchase Active Rate</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Gross Booked Accounts (#)</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Ever Purchase Active Accounts (#)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Ever Purchase Activation Rate (%)</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Container 2: Portfolio Activity -->
+  <!-- Container 2: Ever Purchase Active -->
+  <div class="s-container">
+    <div class="kpi-chart">
+      <div class="kpi-side">
+        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Accounts (#)</div><div class="kpi-val">48</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Ever Purchase Active Rate (%)</div><div class="kpi-val">85.71%</div></div>
+      </div>
+      <div class="chart-pane">
+        <div class="chart-wrap">
+          <div class="bars" id="port-epa"></div>
+        </div>
+        <div class="ax" id="port-epa-ax"></div>
+        <div class="leg">
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>New Added Accounts (#)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container 3: Portfolio Activity -->
   <div class="s-container">
     <div class="s-heading">Portfolio Activity</div>
     <div class="kpi-chart">
       <div class="kpi-side">
-        <div class="kpi-cell"><div class="kpi-name">Open Accounts (#)</div><div class="kpi-val">78,930</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Balance Active Accounts (#)</div><div class="kpi-val">41,520</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Balance Active Rate (%)</div><div class="kpi-val">52.6%</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Purchase Active Accounts (#)</div><div class="kpi-val">63,810</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Purchase Active Rate (%)</div><div class="kpi-val">80.8%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Open Accounts (#)</div><div class="kpi-val">56</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Balance Active Accounts (#)</div><div class="kpi-val">48</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Balance Active Rate (%)</div><div class="kpi-val">85.71%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Purchase Active Accounts (#)</div><div class="kpi-val">41</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Purchase Active Rate (%)</div><div class="kpi-val">73.21%</div></div>
       </div>
       <div class="chart-pane">
         <div class="chart-wrap">
           <div class="bars" id="port-act"></div>
           <div class="ln-over"><svg viewBox="0 0 1000 200" preserveAspectRatio="none">
-            <polyline points="50,75 150,70 250,65 350,60 450,55 550,50 650,46 750,42 850,41 950,40" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="50,10 150,10 250,30 350,30 450,25 550,20 650,15 750,20 850,18 950,10" fill="none" stroke="var(--t1)" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="50,30 150,30 250,50 350,55 450,45 550,40 650,35 750,40 850,38 950,30" fill="none" stroke="var(--p1)" stroke-width="2.5" stroke-linecap="round"/>
           </svg></div>
         </div>
         <div class="ax" id="port-act-ax"></div>
         <div class="leg">
-          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Open Accounts</div>
-          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Purchase Active</div>
-          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Purchase Active Rate</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Open Accounts (#)</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Balance Active Accounts (#)</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Purchase Active Accounts (#)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Balance Active Rate (%)</div>
+          <div class="leg-item"><div class="leg-ln" style="background:var(--p1)"></div>Purchase Active Rate (%)</div>
         </div>
       </div>
     </div>
@@ -725,8 +745,8 @@
   <div class="s-container">
     <div class="kpi-chart">
       <div class="kpi-side">
-        <div class="kpi-cell"><div class="kpi-name">Closed Accounts (#)</div><div class="kpi-val">1,870</div><div class="kpi-sub">Total count of closed, revoked, and charged-off accounts</div></div>
-        <div class="kpi-cell"><div class="kpi-name">Voluntary Closure Rate (%)</div><div class="kpi-val">70.1%</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Closed Accounts (#)</div><div class="kpi-val">0</div><div class="kpi-sub">Total count of closed, revoked, and charged-off accounts</div></div>
+        <div class="kpi-cell"><div class="kpi-name">Voluntary Closure Rate (%)</div><div class="kpi-val">0.00%</div></div>
       </div>
       <div class="chart-pane">
         <div class="chart-wrap">
@@ -831,9 +851,10 @@ stk('txn-ct',['#4e79a7','#74a1c8'],[80,48]);
 stk('txn-oo',['#4e79a7','#74a1c8'],[70,56]);
 
 // PORTFOLIO
-grp('port-growth',['#4e79a7','#74a1c8'],[140,35]);
-grp('port-act',['#4e79a7','#74a1c8'],[130,100]);
-grp('port-closed',['#4e79a7'],[55]);
+grp('port-growth',['#4e79a7','#74a1c8'],[140,120]);
+grp('port-epa',['#a0cbe8'],[100]);
+grp('port-act',['#4e79a7','#74a1c8','#a0cbe8'],[130,100,80]);
+grp('port-closed',['#4e79a7'],[5]);
 
 // PAGE NAV
 function goPage(n,el){
