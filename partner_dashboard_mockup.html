@@ -103,11 +103,11 @@
   }
 
   /* ========== DATE AXIS ========== */
-  .ax { display: flex; gap: 2px; padding-top: 6px; }
+  .ax { display: flex; gap: 2px; padding-top: 6px; margin-bottom: 4px; }
   .ax span { flex: 1; text-align: center; font-size: 10px; color: #999; }
 
   /* ========== LEGEND ========== */
-  .leg { display: flex; gap: 14px; padding: 6px 0 2px; flex-wrap: wrap; }
+  .leg { display: flex; gap: 14px; padding: 8px 0 4px; flex-wrap: wrap; }
   .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #666; }
   .leg-sq { width: 8px; height: 8px; border-radius: 1.5px; flex-shrink: 0; }
   .leg-ln { width: 14px; height: 2.5px; border-radius: 2px; flex-shrink: 0; }
@@ -265,9 +265,8 @@
     </div>
     <div class="ctrl"><span class="ctrl-label">Utm Source</span><select class="ctrl-select"><option>Select values</option></select></div>
     <div class="ctrl"><span class="ctrl-label">Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
-    <div class="ctrl"><span class="ctrl-label">Credit Score Band</span><select class="ctrl-select"><option>Select values</option></select></div>
     <div class="ctrl"><span class="ctrl-label">Level 3 Sub Channel</span><select class="ctrl-select"><option>Select values</option></select></div>
-    <div class="ctrl"><span class="ctrl-label">Event Name</span><select class="ctrl-select"><option>Select values</option></select></div>
+    <div class="ctrl"><span class="ctrl-label">Credit Score Band</span><select class="ctrl-select"><option>Select values</option></select></div>
   </div>
 
   <!-- Container 1: KPI sidebar + Application Metrics combo -->
@@ -295,7 +294,7 @@
           <div class="leg-item"><div class="leg-sq" style="background:var(--b1)"></div>Submitted</div>
           <div class="leg-item"><div class="leg-sq" style="background:var(--b2)"></div>Underwritten</div>
           <div class="leg-item"><div class="leg-sq" style="background:var(--b3)"></div>Approved</div>
-          <div class="leg-item"><div class="leg-sq" style="background:var(--gold)"></div>Booked</div>
+          <div class="leg-item"><div class="leg-sq" style="background:var(--t3)"></div>Booked</div>
           <div class="leg-item"><div class="leg-ln" style="background:var(--orange)"></div>TTD Approval Rate</div>
           <div class="leg-item"><div class="leg-ln" style="background:var(--t1)"></div>Offer Accept Rate</div>
           <div class="leg-item"><div class="leg-ln" style="background:var(--p1)"></div>Conversion Rate</div>
@@ -832,7 +831,7 @@ function grp(id,cols,hs){var e=document.getElementById(id);if(!e)return;for(var 
 function stk(id,cols,hs){var e=document.getElementById(id);if(!e)return;for(var i=0;i<N;i++){var g=document.createElement('div');g.className='bar-grp';g.style.flexDirection='column';g.style.justifyContent='flex-end';cols.forEach(function(c,ci){var b=document.createElement('div');b.className='b';var h=hs[ci]*(0.5+i*0.055);if(i>=8)h*=0.92;b.style.height=Math.round(h)+'px';b.style.background=c;b.style.width='55%';b.style.borderRadius=ci===0?'2px 2px 0 0':'0';g.appendChild(b);});e.appendChild(g);}ax(e);}
 
 // APPLICATIONS
-grp('app-combo',['#4e79a7','#74a1c8','#a0cbe8','#f0c75e'],[100,84,62,54]);
+grp('app-combo',['#4e79a7','#74a1c8','#a0cbe8','#86bcb6'],[100,84,62,54]);
 grp('app-apr-cl',['#4e79a7'],[130]);
 stk('na-csb',['#4e79a7','#74a1c8','#a0cbe8','#898989','#d4d4d4'],[32,26,22,16,10]);
 stk('na-ch',['#74a1c8','#4e79a7','#a0cbe8','#4a9794','#69aaa4','#c290b4'],[38,28,16,11,9,8]);
